@@ -1,0 +1,82 @@
+using UnityEngine;
+
+// 2D MoveTowards example
+// Move the sprite to where the mouse is clicked
+//
+// Set speed to -1.0f and the sprite will move
+// away from the mouse click position forever
+
+public class BubbleFloat : MonoBehaviour
+{
+
+    // ===== Script References =====
+    // Create a reference to the following scripts:
+    public TargetInfo targetScript; // TargetInfo.cs
+    public PlayerMovement playerMovementScript; // PlayerMovement.cs
+    public PlayerInfo playerScript; // PlayerInfo.cs
+    // =============================
+
+    // ===== Variables/Components =====
+    private Rigidbody2D playerRB; // Player's Rigidbody Component
+    private Vector2 playerPos; // Player's Location
+    private Vector2 targetPos; // Target's Location
+    // ================================
+
+
+    // How fast the bubble will approach the target
+    [SerializeField] private float floatSpeed = 10f;
+
+    private void Awake()
+    {
+
+        // ===== Player =====
+        GameObject playerGO = GameObject.Find("Player"); // Assign GameObject
+        playerScript = playerGO.GetComponent<PlayerInfo>(); // Access PlayerInfo.cs
+        GetPlayerCoords(); // Get coordinates (X,Y,Z)
+
+        // ===== Target =====
+        GameObject targetGO = GameObject.Find("Target"); // Assign GameObject
+        targetScript = targetGO.GetComponent<TargetInfo>(); // Access TargetInfo.cs
+        GetTargetCoords(); // Get coordinates (X,Y,Z)
+    
+    }
+
+    public void GetPlayerCoords()
+    {
+        playerPos = playerScript.GetPlayerPosition();
+        Debug.Log("From MoveExample.cs | Player Coordinates Received: " + playerPos.x + ", " + playerPos.y);
+    }
+
+    public void GetTargetCoords()
+    {
+        targetPos = targetScript.GetTargetPosition();
+        Debug.Log("From MoveExample.cs | Target Coordinates Received: " + targetPos.x + ", " + targetPos.y);
+    }
+
+    void Start()
+    {
+
+    }
+
+    void Update()
+    {
+
+        float step = floatSpeed * Time.deltaTime;
+
+        // move sprite towards the target location
+        // transform.position = Vector2.MoveTowards(transform.position, target, step);
+
+        //transform.position = new Vector2(transform.position.x, transform.position.y);
+        //transform.position = new Vector2(transform.position.x, transform.position.y);
+    }
+
+    private void PlayerInput()
+    {
+        // // Access buttons from PlayerControls.inputactions
+        // movement = playerControls.MoveHorizontal.Move.ReadValue<Vector2>();
+        // // This is continuously called in Update()
+        // // to read the value of the X-axis.
+
+    }
+    
+}
