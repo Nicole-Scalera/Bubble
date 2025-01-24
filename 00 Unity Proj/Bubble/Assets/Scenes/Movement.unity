@@ -837,8 +837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetScript: {fileID: 0}
-  playerMovementScript: {fileID: 0}
-  playerScript: {fileID: 0}
+  playerInfoScript: {fileID: 0}
   floatSpeed: 10
 --- !u!114 &821932018
 MonoBehaviour:

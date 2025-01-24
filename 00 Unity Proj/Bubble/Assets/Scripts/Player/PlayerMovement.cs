@@ -14,7 +14,9 @@ public class PlayerMovement : MonoBehaviour
 
     // ================================
 
-    [SerializeField] private float moveSpeed = 10f;
+    // [SerializeField] private float moveSpeed = 5;
+
+    private float moveSpeed = 5;
 
     private void Awake()
     {
