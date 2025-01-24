@@ -12,8 +12,8 @@ public class BubbleFloat : MonoBehaviour
     // ===== Script References =====
     // Create a reference to the following scripts:
     public TargetInfo targetScript; // TargetInfo.cs
-    public PlayerMovement playerMovementScript; // PlayerMovement.cs
-    public PlayerInfo playerScript; // PlayerInfo.cs
+    //public PlayerMovement playerMovementScript; // PlayerMovement.cs
+    public PlayerInfo playerInfoScript; // PlayerInfo.cs
     // =============================
 
     // ===== Variables/Components =====
@@ -24,14 +24,17 @@ public class BubbleFloat : MonoBehaviour
 
 
     // How fast the bubble will approach the target
-    [SerializeField] private float floatSpeed = 10f;
+    //[SerializeField] private float floatSpeed = 10f;
+
+    private float floatSpeed = 5;
 
     private void Awake()
     {
 
         // ===== Player =====
         GameObject playerGO = GameObject.Find("Player"); // Assign GameObject
-        playerScript = playerGO.GetComponent<PlayerInfo>(); // Access PlayerInfo.cs
+        playerInfoScript = playerGO.GetComponent<PlayerInfo>(); // Access PlayerInfo.cs
+        //playerMovementScript = playerGO.GetComponent<PlayerMovement>(); // Access PlayerInfo.cs
         GetPlayerCoords(); // Get coordinates (X,Y,Z)
 
         // ===== Target =====
@@ -43,14 +46,14 @@ public class BubbleFloat : MonoBehaviour
 
     public void GetPlayerCoords()
     {
-        playerPos = playerScript.GetPlayerPosition();
-        Debug.Log("From MoveExample.cs | Player Coordinates Received: " + playerPos.x + ", " + playerPos.y);
+        playerPos = playerInfoScript.GetPlayerPosition();
+        Debug.Log("From MoveExample.cs | Player Coordinates Received: (" + playerPos.x + ", " + playerPos.y + ")");
     }
 
     public void GetTargetCoords()
     {
         targetPos = targetScript.GetTargetPosition();
-        Debug.Log("From MoveExample.cs | Target Coordinates Received: " + targetPos.x + ", " + targetPos.y);
+        Debug.Log("From MoveExample.cs | Target Coordinates Received: (" + targetPos.x + ", " + targetPos.y + ")");
     }
 
     void Start()
