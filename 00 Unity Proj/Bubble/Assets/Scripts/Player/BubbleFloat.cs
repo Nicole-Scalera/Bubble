@@ -18,9 +18,15 @@ public class BubbleFloat : MonoBehaviour
 
     // ===== Variables/Components =====
     private Rigidbody2D playerRB; // Player's Rigidbody Component
-    private Vector2 playerPos; // Player's Location
+    //private Vector2 playerPos; // Player's Location
     private Vector2 targetPos; // Target's Location
+
     // ================================
+    
+    // === Scrolling ===
+    public float scrollSpeed;
+    public float tileSizeZ;
+    private Vector2 startPosition; // Where does the player start
 
 
     // How fast the bubble will approach the target
@@ -35,7 +41,7 @@ public class BubbleFloat : MonoBehaviour
         GameObject playerGO = GameObject.Find("Player"); // Assign GameObject
         playerInfoScript = playerGO.GetComponent<PlayerInfo>(); // Access PlayerInfo.cs
         //playerMovementScript = playerGO.GetComponent<PlayerMovement>(); // Access PlayerInfo.cs
-        GetPlayerCoords(); // Get coordinates (X,Y,Z)
+        GetPlayerStartPosition(); // Get coordinates (X,Y,Z)
 
         // ===== Target =====
         GameObject targetGO = GameObject.Find("Target"); // Assign GameObject
@@ -44,10 +50,10 @@ public class BubbleFloat : MonoBehaviour
     
     }
 
-    public void GetPlayerCoords()
+    public void GetPlayerStartPosition()
     {
-        playerPos = playerInfoScript.GetPlayerPosition();
-        Debug.Log("From MoveExample.cs | Player Coordinates Received: (" + playerPos.x + ", " + playerPos.y + ")");
+        startPosition = playerInfoScript.GetPlayerCoords();
+        Debug.Log("From MoveExample.cs | Player Coordinates Received: (" + startPosition.x + ", " + startPosition.y + ")");
     }
 
     public void GetTargetCoords()
@@ -71,6 +77,11 @@ public class BubbleFloat : MonoBehaviour
 
         //transform.position = new Vector2(transform.position.x, transform.position.y);
         //transform.position = new Vector2(transform.position.x, transform.position.y);
+        
+        float newPosition = Mathf.Repeat(Time.time * scrollSpeed, tileSizeZ);
+        // transform.position = startPosition + Vector3.forward * newPosition;
+        
+        
     }
 
     private void PlayerInput()
