@@ -836,7 +836,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetScript: {fileID: 0}
   playerInfoScript: {fileID: 0}
-  floatSpeed: 10
 --- !u!114 &821932018
 MonoBehaviour:
   m_ObjectHideFlags: 0

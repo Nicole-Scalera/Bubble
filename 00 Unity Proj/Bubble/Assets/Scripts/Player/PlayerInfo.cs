@@ -8,8 +8,7 @@ public class PlayerInfo : MonoBehaviour
 
     void Awake()
     {
-        // Assign the coordinates to playerPosition
-        //Debug.Log("From the Awake() in the TargetInfo class: " + playerPosition);
+        
     }
 
     // Encapsulation of assigning the player position
