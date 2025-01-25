@@ -13,11 +13,12 @@ public class PlayerInfo : MonoBehaviour
     }
 
     // Encapsulation of assigning the player position
-    public Vector2 GetPlayerPosition()
+    public Vector2 GetPlayerCoords()
     {
-        playerPosition = GetComponent<Transform>().position;
+        // Get the player's position from the Transform component
+        playerPosition = transform.position;
         Debug.Log("From the GetPlayerPosition() in the PlayerInfo class: (" + playerPosition.x + ", " + playerPosition.y + ")");
-        return playerPosition;
+        return playerPosition; // Return the position in a Vector2 for any time this method is called
     }
-
+    
 }
