@@ -1,59 +1,91 @@
+using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
 
     // ===== Script References =====
-    private PlayerInfo playerScript; // PlayerInfo.cs
+    public TargetInfo targetInfo; // TargetInfo.cs
+    public PlayerInfo playerInfo; // PlayerInfo.cs
     private PlayerControls playerControls; // PlayerControls.cs
     // =============================
 
     // ===== Variables/Components =====
     private Rigidbody2D playerRB; // Player's Rigidbody Component
-    private Vector2 playerPosition;
-
+    private Vector2 startPos; // Player's Starting Location
+    private Vector2 playerPos; // Player's Current Location
+    private Vector2 newPos; // Player's Next Location
+    private Vector2 targetPos; // Target's Location
+    private float moveSpeed; // Player's Horizontal Speed (Player-controlled)
+    private float floatSpeed; // Player's Vertical Speed (Automatic)
+    private GameObject playerGO;
     // ================================
-
-    // [SerializeField] private float moveSpeed = 5;
-
-    private float moveSpeed = 5;
 
     private void Awake()
     {
+        // ===== Player =====
+        playerGO = GameObject.Find("Player"); // Assign GameObject
+        playerInfo = playerGO.GetComponent<PlayerInfo>(); // Access PlayerInfo.cs
+        GetPlayerInfo(); // Get the Player's info
+        playerControls = new PlayerControls(); // Access movement controls
 
-        // Assign the Target GameObject
-        GameObject playerGO = GameObject.Find("Player");
-
-        // Access Input info for Player
-        playerControls = new PlayerControls();
-
-        // Access the PlayerInfo.cs script
-        playerScript = playerGO.GetComponent<PlayerInfo>();
-
-        // Grab the Rigidbody2D component
-        playerRB = GetComponent<Rigidbody2D>();
-
-        // Grab the player's coordinates (X,Y,Z) from PlayerInfo.cs
-        playerPosition = GetComponent<Transform>().position;
-        
+        // ===== Target =====
+        GameObject targetGO = GameObject.Find("Target"); // Assign GameObject
+        targetInfo = targetGO.GetComponent<TargetInfo>(); // Access TargetInfo.cs
+        GetTargetInfo(); // Get the Target's info
     }
 
-    private void Start()
+    public void GetPlayerInfo()
     {
+        // Get the following information about the Player
+        playerRB = playerInfo.GetRigidbody2D(); // RigidBody2D
+        startPos = playerInfo.GetPlayerPosition(); // Starting Position
+        moveSpeed = playerInfo.GetPlayerSpeedX(); // Horizontal Speed
+        floatSpeed = playerInfo.GetPlayerSpeedY(); // Vertical Speed
 
+        // Debug this info
+        Debug.Log($"PlayerMovement.cs > GetPlayerInfo(): Player's starting position is ({startPos.x}, {startPos.y})");
+        Debug.Log($"PlayerMovement.cs > GetPlayerInfo(): Player's horizontal speed is {moveSpeed}");
+        Debug.Log($"PlayerMovement.cs > GetPlayerInfo(): Player's vertical speed is {floatSpeed}");
     }
 
+    public void GetTargetInfo()
+    {
+        // Get the following information about the Target
+        targetPos = targetInfo.GetTargetPosition(); // Target's Position
 
-    // Set controls to active ("Enable")
+        // Debug this info
+        Debug.Log($"PlayerMovement.cs > GetTargetInfo(): Target's position is {targetPos}");
+    }
+
+    void Start()
+    {
+        // When the script is called, grab the player's starting
+        // position and set it as the current position.
+        playerPos = startPos;
+        // The player's position will then
+        // continuously be updated in Update()
+    }
+
     private void OnEnable()
     {
         playerControls.Enable();
-
     }
 
-    private void Update()
+    void Update()
     {
-        PlayerInput();
+        // Speed Vertical
+        float step = floatSpeed * Time.deltaTime;
+
+        // Update the X coordinate
+        float newX = playerControls.MoveHorizontal.Move.ReadValue<Vector2>().x;
+
+        // Update the Y coordinate | Move player towards target
+        float newY = Vector2.MoveTowards(playerPos, targetPos, step).y;
+
+        // Set the Player's position to the new coordinates
+        newPos = new Vector2(newX, newY);
+        playerPos = newPos;
     }
 
     private void FixedUpdate()
@@ -61,20 +93,10 @@ public class PlayerMovement : MonoBehaviour
         Move();
     }
 
-    private void PlayerInput()
-    {
-        // Access buttons from PlayerControls.inputactions
-        playerPosition = playerControls.MoveHorizontal.Move.ReadValue<Vector2>();
-        //Debug.Log("Player Position: " + playerPosition);
-                                     // ^^^ Continuously called through Update()
-                                     // to acess the player's coordinates.
-
-    }
-
     private void Move()
     {
-        playerRB.MovePosition(playerRB.position + playerPosition * (moveSpeed * Time.fixedDeltaTime));
-
-    }  
+        // Move the Player's Rigidbody2D component
+        playerRB.MovePosition(playerRB.position + playerPos * (moveSpeed * Time.fixedDeltaTime));
+    }
 
 }

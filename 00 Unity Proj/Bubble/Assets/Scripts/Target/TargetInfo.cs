@@ -11,12 +11,11 @@ public class TargetInfo : MonoBehaviour
         
     }
 
-    // Encapsulation of assigning the target position
+    // Get the Target's location in the scene
     public Vector2 GetTargetPosition()
     {
-        // Get the player's position from the Transform component
+        // Get the Target's position from the Transform component
         targetPosition = transform.position;
-        Debug.Log("From the GetTargetPosition() in the TargetInfo class: (" + targetPosition.x + ", " + targetPosition.y + ")");
         return targetPosition; // Return the position in a Vector2 for any time this method is called
     }
 
