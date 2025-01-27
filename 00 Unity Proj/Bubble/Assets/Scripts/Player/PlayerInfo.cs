@@ -8,8 +8,8 @@ public class PlayerInfo : MonoBehaviour
 
     // ===== Variables =====
     private Vector2 playerPosition; // Coordinates of the Player (X,Y)
-    private float moveSpeed; // Player's Horizontal Speed (Player-controlled)
-    private float floatSpeed; // Player's Vertical Speed (Automatic)
+    [SerializeField] private float moveSpeed; // Player's Horizontal Speed (Player-controlled)
+    [SerializeField] private float floatSpeed; // Player's Vertical Speed (Automatic)
     private Rigidbody2D playerRB; // Player's Rigidbody Component
 
     // =====================
@@ -30,14 +30,12 @@ public class PlayerInfo : MonoBehaviour
     // Get the Player's horizontal movement speed
     public float GetPlayerSpeedX()
     {
-        moveSpeed = 10;
         return moveSpeed;
     }
 
     // Get the Player's vertical movement speed
     public float GetPlayerSpeedY()
     {
-        floatSpeed = 1f;
         return floatSpeed;
     }
 
