@@ -1,0 +1,11 @@
+Meeting: Nikki and Paul
+Date: 1/30/25
+
+- Paul drew up a prototype of the new first level, which is the bathroom.
+     - Tile background with bathtub.
+     - This can be adjusted in the future, but he will upload it to the GitHub for reference.
+- Nikki explained the current UI position to Paul, let him know that she will get back to him about what the exact size the backgrounds should be.
+     - Nikki explained that she needs to play around with the camera and UI canvases.
+- Paul suggested that the obstacles/enemies can be static, but can also move side-to-side.
+- Nikki informed Paul that we need a new logo for the game.
+- Also need Level Design. Paul said he can start working on level design for the bathroom.
