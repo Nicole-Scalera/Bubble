@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     // Create References to relevant GameObjects
     public GameObject playerObject; // Player
     public GameObject targetObject; // Target
+    public GameObject mainCamera; // Main Camera
+    private Vector2 mainCameraPos; // Camera's Current Location
+    private CameraInfo cameraInfo; // CameraInfo.cs
 
     private void Awake()
     {
@@ -23,15 +26,31 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        targetObject = GameObject.Find("Target"); // Assign Target GameObject
+        // ===== Player =====
         playerObject = GameObject.Find("Player"); // Assign Player GameObject
+        //playerInfo = playerGO.GetComponent<PlayerInfo>(); // Access PlayerInfo.cs
 
+        // ===== Target =====
+        targetObject = GameObject.Find("Target"); // Assign Target GameObject
+
+
+        // ===== Main Camera =====
+        mainCamera = GameObject.Find("Main Camera"); // Assign Main Camera
+        cameraInfo = mainCamera.GetComponent<CameraInfo>(); // Access CameraInfo.cs
+        GetCameraInfo();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    // Get and assign camera information
+    public void GetCameraInfo()
     {
+        // Get the following information about the Camera
+        mainCameraPos = cameraInfo.GetCameraPosition(); // Camera's Position
+    }
 
+    void Update() {
+        // For Debugging:
+        GetCameraInfo();
+        Debug.Log($"GameManager.cs > Update(): Camera's position is ({mainCameraPos.x}, {mainCameraPos.y})");
     }
     
 }
