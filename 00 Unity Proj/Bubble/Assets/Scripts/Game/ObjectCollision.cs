@@ -7,7 +7,7 @@
 
 using UnityEngine;
 
-public class CollisionTrigger : MonoBehaviour
+public class ObjectCollision : MonoBehaviour
 {
     public SceneChanger sceneChanger; // Reference to the SceneChanger script
     private string sceneName;
