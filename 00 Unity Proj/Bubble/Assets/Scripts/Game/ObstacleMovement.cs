@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObstacleMovement : MonoBehaviour
@@ -8,22 +9,37 @@ public class ObstacleMovement : MonoBehaviour
     public int startingPoint;
     public Transform[] points;
     Rigidbody2D playerRigidBody;
-    public PlayerMovement myPlayer;
     private int i;
+    GameObject CloudObstacle;
+    UnityEngine.Vector3 moveDirection;
+    private void Awake()
+    {
+        playerRigidBody = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+    }
     void Start()
     {
-        transform.position = points[startingPoint].position;
+        CloudObstacle.gameObject.GetComponent<Rigidbody2D>().transform.position = points[startingPoint].position;
+        DirectionCalculate();
     }
     void Update()
     {
-        if (UnityEngine.Vector2.Distance(transform.position, points[i].position) < 0.02f)
+        if (UnityEngine.Vector2.Distance(transform.position, points[i].position) < 0.05f)
         {
             i++;
             if (i == points.Length)
             {
                 i = 0;
+                DirectionCalculate();
             }
         }
-        transform.position = UnityEngine.Vector2.MoveTowards(transform.position, points[i].position, speed * Time.deltaTime);
+        if (UnityEngine.Vector2.Distance(transform.position,points[i].position) > 0.02f)
+        {
+            UnityEngine.Vector2.MoveTowards(transform.position,points[i].position, speed * Time.deltaTime);
+            DirectionCalculate();
+        }
+    }
+    void DirectionCalculate() 
+    {
+        moveDirection = transform.position.normalized;
     }
 }
