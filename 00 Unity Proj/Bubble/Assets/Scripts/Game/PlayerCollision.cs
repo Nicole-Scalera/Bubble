@@ -5,10 +5,12 @@ using UnityEngine;
 public class CloudCollision : MonoBehaviour
 {
     Rigidbody2D playerRigidbody;
+    public GameObject thePlayer;
     public SceneChanger sceneChanger; // Reference to the SceneChanger script
     public GameObject playerCamera;
-    public UnityEngine.Vector2 respawnPosition;
-    public GameObject savePoint;
+    public GameObject saveNspawnPoint;
+    public GameObject NewSavePoint;
+    public GameObject playerStartGamePoint;
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
@@ -16,13 +18,18 @@ public class CloudCollision : MonoBehaviour
     public void Start()
     {
         playerCamera = GameObject.FindGameObjectWithTag("Camera");
-        respawnPosition = savePoint.transform.position;
+        playerStartGamePoint = saveNspawnPoint;
     }
     private void OnTriggerEnter2D (Collider2D collision)
     {
         if (collision.CompareTag("Obstacle"))
         {
             Die();
+        }
+
+        if (collision.CompareTag("TargetReached"))
+        {
+            UpdateRespawn();
         }
     }
     void Die()
@@ -36,8 +43,12 @@ public class CloudCollision : MonoBehaviour
         playerRigidbody.velocity = new UnityEngine.Vector2(0,0);
         transform.localScale = new UnityEngine.Vector2(0,0);
         yield return new WaitForSeconds(duration);
-        transform.position = respawnPosition;
         transform.localScale = new UnityEngine.Vector2(0,0);
         playerRigidbody.simulated = true;
+    }
+
+    void UpdateRespawn()
+    {
+        NewSavePoint = saveNspawnPoint;
     }
 }
