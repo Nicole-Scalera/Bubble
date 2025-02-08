@@ -10,7 +10,6 @@ public class ObstacleMovement : MonoBehaviour
     public Transform[] points;
     Rigidbody2D playerRigidBody;
     private int i;
-    public GameObject CloudObstacle;
     UnityEngine.Vector3 moveDirection;
     private void Awake()
     {
@@ -18,7 +17,6 @@ public class ObstacleMovement : MonoBehaviour
     }
     void Start()
     {
-        CloudObstacle.gameObject.GetComponent<Rigidbody2D>().transform.position = points[startingPoint].position;
         DirectionCalculate();
     }
     void Update()
