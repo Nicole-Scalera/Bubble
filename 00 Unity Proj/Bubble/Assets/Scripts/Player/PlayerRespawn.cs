@@ -1,6 +1,8 @@
 using System.Collections;
+using System.Numerics;
 using UnityEditor.AssetImporters;
 using UnityEngine;
+using UnityEngine.InputSystem.Android;
 
 public class PlayerRespawn : MonoBehaviour
 {
@@ -12,7 +14,7 @@ public class PlayerRespawn : MonoBehaviour
     private GameObject nextSpawn; // Reference to the Spawn point that the player will be using for the Respawn (before the UpdatedRespawn)
     private UnityEngine.Vector2 currentSpawn; // Reference to the current save point that the player will spawn at when they die/hit an obstacle
     public int playerLives;
-    public Script
+    private GameOver instanceOfGameOver;
     private void Awake() // Tried to make sure that things are staying the right way for the player when loading into the game
     {
         playerRb = GetComponent<Rigidbody2D>();
@@ -21,6 +23,7 @@ public class PlayerRespawn : MonoBehaviour
     {
         firstPlaySpawn = GameObject.FindGameObjectWithTag("FirstStart");
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        firstPlaySpawn.transform.position = playerRb.transform.position;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -35,13 +38,10 @@ public class PlayerRespawn : MonoBehaviour
     }
     void Die()
     {
-        --playerLives;
+        playerLives--;
         if (playerLives > 0)
         {
             StartCoroutine(Respawn(0.5f)); //This is important for the amount }of time between the player dying and the spawning back on the screen
-        }
-        else {
-            StartGameOver();
         }
     }
     IEnumerator Respawn(float duration) // further breaks down what happens during respawn
@@ -60,9 +60,5 @@ public class PlayerRespawn : MonoBehaviour
         currentSpawn = currentTarget.transform.position; // Updates the current spawn point to the previous target point
         currentTarget = GameObject.FindGameObjectWithTag("TargetReached").GetComponent<ChangeTarget>().nextTargetPoint; // Updates the further target that is stored witin the ChangeTarget script and makes sure everything interconnects
         nextTarget = GameObject.FindGameObjectWithTag("TargetReached").GetComponent<ChangeTarget>().followingTargetPoint; // Updates the targets across the game, just insuring that there is the capability of multiple save points/spawn points that function whereever and whenever needed
-    }
-    void StartGameOver()
-    {
-        scriptInGameOverWindow = GameObject.FindObjectOfType(typeof(Script))
     }
 }
