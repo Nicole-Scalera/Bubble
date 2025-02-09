@@ -1,27 +1,33 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem.Android;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] GameObject pauseMenu = null;
+    public GameObject pauseMenu;
     public bool isPaused;
     public GameObject playerObject;
-    private UnityEngine.Vector2 hiddenMenuPosition;
-    private UnityEngine.Vector2 visibleMenuPosition;
-    public GameObject menuStartPosition;
     public Button resumeButton;
     public Button restartButton;
     public Button quitButton;
-    void Start()
+    public GameObject buttons;
+    public GameObject images;
+    private UnityEngine.Vector2 visibleMenuPosition;
+    private bool canPause;
+    void Awake()
     {
+        canPause = true;
+        buttons.SetActive(false);
+        images.SetActive(false);
+        pauseMenu.transform.position = playerObject.transform.position;
         resumeButton = GetComponent<Button>();
         restartButton = GetComponent<Button>();
         quitButton = GetComponent<Button>();
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) & canPause == true)
         {
             PauseGame();
         }
@@ -30,24 +36,29 @@ public class PauseMenu : MonoBehaviour
     {
         isPaused = true;
         Time.timeScale = 0;
-        pauseMenu.SetActive(isPaused);
+        canPause = false;
         MoveMenuInView();
     }
     public void ResumeGame()
     {
         isPaused = false;
         Time.timeScale = 1;
-        pauseMenu.SetActive(isPaused);
+        canPause = true;
         MoveMenuOutOfView();
     }
     void MoveMenuInView()
     {
         visibleMenuPosition = pauseMenu.transform.position;
-        playerObject.transform.position = pauseMenu.transform.position;   
+        playerObject.transform.position = pauseMenu.transform.position;
+        pauseMenu.SetActive(true);
+        buttons.SetActive(true);
+        images.SetActive(true);
     }
     void MoveMenuOutOfView()
-    {
-        hiddenMenuPosition = menuStartPosition.transform.position;
+    {   
+        pauseMenu.SetActive(false);
+        buttons.SetActive(false);
+        images.SetActive(false);
     }
     public void RestartGame()
     {

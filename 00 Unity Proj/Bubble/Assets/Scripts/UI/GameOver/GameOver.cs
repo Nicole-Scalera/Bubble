@@ -4,22 +4,40 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
-    [SerializeField] GameObject gameOverMenu = null;
+    public GameObject gameOverMenu;
+    public GameObject buttons;
+    public GameObject images;
     public GameObject playerObject;
     private UnityEngine.Vector2 visibleMenuPosition;
     public Button retryButton;
     public Button quitButton;
-    // Start is called before the first frame update
-    void Start()
+    private int livesPlayerHas;
+    void Awake()
+    {
+        buttons.SetActive(false);
+        images.SetActive(false);
+        gameOverMenu.transform.position = playerObject.transform.position;
+    }
+    public void Start()
     {
         retryButton = GetComponent<Button>();
         quitButton = GetComponent<Button>();
-        MoveMenuInView();
+    }
+    void Update()
+    {
+        livesPlayerHas = GameObject.Find("Player").GetComponent<PlayerRespawn>().playerLives;
+        if (livesPlayerHas <= 0)
+        {
+            MoveMenuInView();
+        }
     }
     void MoveMenuInView()
     {
         visibleMenuPosition = gameOverMenu.transform.position;
         playerObject.transform.position = gameOverMenu.transform.position;
+        gameOverMenu.SetActive(true);
+        buttons.SetActive(true);
+        images.SetActive(true);
     }
     public void RetryGame()
     {
