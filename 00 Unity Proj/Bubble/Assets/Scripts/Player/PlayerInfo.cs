@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 // This is the PlayerInfo class. It encapsulates general data and info about
@@ -5,6 +6,27 @@ using UnityEngine;
 
 public class PlayerInfo : MonoBehaviour
 {
+
+    // Singleton instance for global reference
+    private static PlayerInfo _playerInfo;
+
+    // Constructor that forces only a single
+    // instance of PlayerInfo to be created
+    public static PlayerInfo Instance
+    {
+        get
+        {
+            // If Player instance is null, assign Player component
+            if (_playerInfo == null)
+            {
+                Player player = Player.Character; // Access Player.cs
+                _playerInfo = player.GetComponent<PlayerInfo>();
+            }
+
+             // Return the PlayerInfo instance
+            return _playerInfo;
+        }
+    }
 
     // ===== Variables =====
     private Vector2 playerPosition; // Coordinates of the Player (X,Y)

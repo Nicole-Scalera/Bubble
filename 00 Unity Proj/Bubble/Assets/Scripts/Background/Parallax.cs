@@ -5,7 +5,7 @@ public class Parallax : MonoBehaviour
 {
 
     // ===== Script References =====
-    public BackgroundInfo backgroundInfo; // BackgroundInfo.cs
+    private BackgroundInfo backgroundInfo; // BackgroundInfo.cs
     // =============================
 
     // ===== Variables/Components =====
