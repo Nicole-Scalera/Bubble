@@ -6,12 +6,19 @@ public class GameManager : MonoBehaviour
     // that we can easily access it anywhere
     public static GameManager Instance;
 
+    // ===== Script References =====
+    public CameraInfo cameraInfo; // CameraInfo.cs
+    // =============================
+
+    // ===== Variables/Components =====
     // Create References to relevant GameObjects
-    public GameObject playerObject; // Player
-    public GameObject targetObject; // Target
-    public GameObject mainCamera; // Main Camera
+    private GameObject playerObject; // Player
+    private GameObject targetObject; // Target
+    private GameObject cameraGO; // Camera GameObject
+    private Camera mainCamera; // Actual Main Camera
     private Vector2 mainCameraPos; // Camera's Current Location
-    private CameraInfo cameraInfo; // CameraInfo.cs
+    // ================================
+
 
     private void Awake()
     {
@@ -35,8 +42,8 @@ public class GameManager : MonoBehaviour
 
 
         // ===== Main Camera =====
-        mainCamera = GameObject.Find("Main Camera"); // Assign Main Camera
-        cameraInfo = mainCamera.GetComponent<CameraInfo>(); // Access CameraInfo.cs
+        cameraGO = GameObject.Find("Main Camera"); // Assign Main Camera
+        cameraInfo = cameraGO.GetComponent<CameraInfo>(); // Access CameraInfo.cs
         GetCameraInfo();
     }
 
@@ -44,13 +51,15 @@ public class GameManager : MonoBehaviour
     public void GetCameraInfo()
     {
         // Get the following information about the Camera
+        mainCamera = cameraInfo.GetCameraComponent(); // Camera Component
         mainCameraPos = cameraInfo.GetCameraPosition(); // Camera's Position
     }
 
-    void Update() {
+    void Update()
+    {
         // For Debugging:
         GetCameraInfo();
         Debug.Log($"GameManager.cs > Update(): Camera's position is ({mainCameraPos.x}, {mainCameraPos.y})");
     }
-    
+
 }
