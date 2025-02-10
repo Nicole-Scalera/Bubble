@@ -10,15 +10,35 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 // This is the CameraInfo class. It encapsulates general data and info about
 // the Main Camera game object, which is utilized throughout other scripts.
 
 public class CameraInfo : MonoBehaviour
 {
-    // Create an instance of the GameManager so
-    // that we can easily access it anywhere
-    private static CameraInfo Instance;
+
+    // Singleton instance for global reference
+    private static CameraInfo _cameraInfo;
+
+    // Constructor that forces only a single
+    // instance of PlayerInfo to be created
+    public static CameraInfo Instance
+    {
+        get
+        {
+            // If Player instance is null, assign Player component
+            if (_cameraInfo == null)
+            {
+                // Grab the main camera, which is the event camera for the background canvas
+                _cameraInfo = GameObject.Find("Background").GetComponent<CameraInfo>();
+            }
+
+             // Return the PlayerInfo instance
+            return _cameraInfo;
+        }
+    }
+
     
     // ===== Variables =====
     [SerializeField] private Vector2 cameraPosition; // Coordinates of the Camera (X,Y)
@@ -26,20 +46,6 @@ public class CameraInfo : MonoBehaviour
     // in the Inspector
     private Camera camComponent; // Camera component attached to the GameObject
     // =====================
-
-    private void Awake()
-    {
-        // Ensure only one instance of GameManager exists
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); // Persist across scenes
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
 
     // Get the Camera component on the object

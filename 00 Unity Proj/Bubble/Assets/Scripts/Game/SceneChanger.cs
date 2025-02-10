@@ -21,7 +21,7 @@ public class SceneChanger : MonoBehaviour
             // If Player instance is null, assign Player component
             if (_sceneChanger == null)
             {
-                _sceneChanger = new SceneChanger(); // Access movement controls
+                _sceneChanger = new SceneChanger(); // Assign SceneChanger
             }
 
             // Return the SceneChanger instance
