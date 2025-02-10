@@ -20,7 +20,15 @@ public class CameraInfo : MonoBehaviour
     [SerializeField] private Vector2 cameraPosition; // Coordinates of the Camera (X,Y)
     // ^^^ Serializing to view
     // in the Inspector
+    private Camera camComponent; // Camera component attached to the GameObject
     // =====================
+
+    // Get the Camera component on the object
+    public Camera GetCameraComponent()
+    {
+        camComponent = GetComponent<Camera>();
+        return camComponent;
+    }
 
     // Get the Camera's location in the scene
     public Vector2 GetCameraPosition()
