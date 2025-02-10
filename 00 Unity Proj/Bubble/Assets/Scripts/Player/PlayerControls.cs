@@ -96,14 +96,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""Mouse"",
-            ""id"": ""4487a806-651f-4b91-9204-26e996b1c11d"",
+            ""name"": ""GameControls"",
+            ""id"": ""e5d68e70-5577-4c77-ad5a-3a1e22848220"",
             ""actions"": [
                 {
-                    ""name"": ""MouseClick"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""b98bfc73-c34c-4da6-8f4a-5d3f611dca10"",
-                    ""expectedControlType"": ""Axis"",
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""a9873515-0274-47b3-a752-2d9f5f068710"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -112,12 +112,23 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""c73cab58-f19d-4709-ad62-1c1ef37ffc40"",
-                    ""path"": """",
+                    ""id"": ""5959e0e6-f7c2-41f2-89fc-46ed3cf0117d"",
+                    ""path"": ""<Keyboard>/pause"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""MouseClick"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""acb8a1ff-cef2-4ef0-bea0-bb383ee27c85"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -129,15 +140,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // MoveHorizontal
         m_MoveHorizontal = asset.FindActionMap("MoveHorizontal", throwIfNotFound: true);
         m_MoveHorizontal_Move = m_MoveHorizontal.FindAction("Move", throwIfNotFound: true);
-        // Mouse
-        m_Mouse = asset.FindActionMap("Mouse", throwIfNotFound: true);
-        m_Mouse_MouseClick = m_Mouse.FindAction("MouseClick", throwIfNotFound: true);
+        // GameControls
+        m_GameControls = asset.FindActionMap("GameControls", throwIfNotFound: true);
+        m_GameControls_Pause = m_GameControls.FindAction("Pause", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
     {
         UnityEngine.Debug.Assert(!m_MoveHorizontal.enabled, "This will cause a leak and performance issues, PlayerControls.MoveHorizontal.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_Mouse.enabled, "This will cause a leak and performance issues, PlayerControls.Mouse.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_GameControls.enabled, "This will cause a leak and performance issues, PlayerControls.GameControls.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -242,57 +253,57 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     }
     public MoveHorizontalActions @MoveHorizontal => new MoveHorizontalActions(this);
 
-    // Mouse
-    private readonly InputActionMap m_Mouse;
-    private List<IMouseActions> m_MouseActionsCallbackInterfaces = new List<IMouseActions>();
-    private readonly InputAction m_Mouse_MouseClick;
-    public struct MouseActions
+    // GameControls
+    private readonly InputActionMap m_GameControls;
+    private List<IGameControlsActions> m_GameControlsActionsCallbackInterfaces = new List<IGameControlsActions>();
+    private readonly InputAction m_GameControls_Pause;
+    public struct GameControlsActions
     {
         private @PlayerControls m_Wrapper;
-        public MouseActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @MouseClick => m_Wrapper.m_Mouse_MouseClick;
-        public InputActionMap Get() { return m_Wrapper.m_Mouse; }
+        public GameControlsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Pause => m_Wrapper.m_GameControls_Pause;
+        public InputActionMap Get() { return m_Wrapper.m_GameControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(MouseActions set) { return set.Get(); }
-        public void AddCallbacks(IMouseActions instance)
+        public static implicit operator InputActionMap(GameControlsActions set) { return set.Get(); }
+        public void AddCallbacks(IGameControlsActions instance)
         {
-            if (instance == null || m_Wrapper.m_MouseActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_MouseActionsCallbackInterfaces.Add(instance);
-            @MouseClick.started += instance.OnMouseClick;
-            @MouseClick.performed += instance.OnMouseClick;
-            @MouseClick.canceled += instance.OnMouseClick;
+            if (instance == null || m_Wrapper.m_GameControlsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_GameControlsActionsCallbackInterfaces.Add(instance);
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
-        private void UnregisterCallbacks(IMouseActions instance)
+        private void UnregisterCallbacks(IGameControlsActions instance)
         {
-            @MouseClick.started -= instance.OnMouseClick;
-            @MouseClick.performed -= instance.OnMouseClick;
-            @MouseClick.canceled -= instance.OnMouseClick;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
-        public void RemoveCallbacks(IMouseActions instance)
+        public void RemoveCallbacks(IGameControlsActions instance)
         {
-            if (m_Wrapper.m_MouseActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_GameControlsActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IMouseActions instance)
+        public void SetCallbacks(IGameControlsActions instance)
         {
-            foreach (var item in m_Wrapper.m_MouseActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_GameControlsActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_MouseActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_GameControlsActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public MouseActions @Mouse => new MouseActions(this);
+    public GameControlsActions @GameControls => new GameControlsActions(this);
     public interface IMoveHorizontalActions
     {
         void OnMove(InputAction.CallbackContext context);
     }
-    public interface IMouseActions
+    public interface IGameControlsActions
     {
-        void OnMouseClick(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

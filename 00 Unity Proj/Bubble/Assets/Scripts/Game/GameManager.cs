@@ -1,3 +1,4 @@
+using Obvious.Soap.Example;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -5,9 +6,11 @@ public class GameManager : MonoBehaviour
     // Create an instance of the GameManager so
     // that we can easily access it anywhere
     public static GameManager Instance;
+    
+    public static PlayerControls playerControls;
 
     // ===== Script References =====
-    public CameraInfo cameraInfo; // CameraInfo.cs
+    public CameraInfo mainCameraInfo; // CameraInfo.cs
     // =============================
 
     // ===== Variables/Components =====
@@ -34,16 +37,14 @@ public class GameManager : MonoBehaviour
         }
 
         // ===== Player =====
-        playerObject = GameObject.Find("Player"); // Assign Player GameObject
-        //playerInfo = playerGO.GetComponent<PlayerInfo>(); // Access PlayerInfo.cs
+        Player player = Player.Character; // Access Player.cs
 
         // ===== Target =====
         targetObject = GameObject.Find("Target"); // Assign Target GameObject
 
-
         // ===== Main Camera =====
         cameraGO = GameObject.Find("Main Camera"); // Assign Main Camera
-        cameraInfo = cameraGO.GetComponent<CameraInfo>(); // Access CameraInfo.cs
+        mainCameraInfo = cameraGO.GetComponent<CameraInfo>(); // Access CameraInfo.cs
         GetCameraInfo();
     }
 
@@ -51,15 +52,15 @@ public class GameManager : MonoBehaviour
     public void GetCameraInfo()
     {
         // Get the following information about the Camera
-        mainCamera = cameraInfo.GetCameraComponent(); // Camera Component
-        mainCameraPos = cameraInfo.GetCameraPosition(); // Camera's Position
+        mainCamera = mainCameraInfo.GetCameraComponent(); // Camera Component
+        mainCameraPos = mainCameraInfo.GetCameraPosition(); // Camera's Position
     }
 
     void Update()
     {
         // For Debugging:
         GetCameraInfo();
-        Debug.Log($"GameManager.cs > Update(): Camera's position is ({mainCameraPos.x}, {mainCameraPos.y})");
+        //Debug.Log($"GameManager.cs > Update(): Camera's position is ({mainCameraPos.x}, {mainCameraPos.y})");
     }
 
 }
