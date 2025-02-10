@@ -8,9 +8,31 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
+
+    // Singleton instance for global reference
+    private static SceneChanger _sceneChanger;
+
+    // Constructor that forces only a single
+    // instance of SceneChanger to be created
+    public static SceneChanger Instance
+    {
+        get
+        {
+            // If Player instance is null, assign Player component
+            if (_sceneChanger == null)
+            {
+                _sceneChanger = new SceneChanger(); // Access movement controls
+            }
+
+            // Return the SceneChanger instance
+            return _sceneChanger;
+        }
+    }
+
     // Current instance of the sceneName
     private string sceneName;
 
+    // Load a scene
     public void LoadScene(string sceneName)
     {
         this.sceneName = sceneName;
@@ -24,4 +46,12 @@ public class SceneChanger : MonoBehaviour
         // Load a scene by its name
         SceneManager.LoadScene(sceneName);
     }
+    
+    // Get the current scene
+    public string GetCurrentSceneName()
+    {
+        // Grab the scene by its name
+        return SceneManager.GetActiveScene().name;
+    }
+    
 }

@@ -74,14 +74,14 @@
             ]
         },
         {
-            "name": "Mouse",
-            "id": "4487a806-651f-4b91-9204-26e996b1c11d",
+            "name": "GameControls",
+            "id": "e5d68e70-5577-4c77-ad5a-3a1e22848220",
             "actions": [
                 {
-                    "name": "MouseClick",
-                    "type": "PassThrough",
-                    "id": "b98bfc73-c34c-4da6-8f4a-5d3f611dca10",
-                    "expectedControlType": "Axis",
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "a9873515-0274-47b3-a752-2d9f5f068710",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -90,12 +90,23 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "c73cab58-f19d-4709-ad62-1c1ef37ffc40",
-                    "path": "",
+                    "id": "5959e0e6-f7c2-41f2-89fc-46ed3cf0117d",
+                    "path": "<Keyboard>/pause",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MouseClick",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "acb8a1ff-cef2-4ef0-bea0-bb383ee27c85",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
