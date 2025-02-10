@@ -1,0 +1,9 @@
+Meeting: Nikki and Sami
+Date: 1/28/25
+
+- In this meeting, Nikki covered the basics of branching in GitHub.
+- This will help with establishing a general workflow for Mista Bubble.
+- Sami's suggestions:
+	- Camera should follow Player on Y-axis only, not X.
+	- Wants to customize the Credits Screen with a different background.
+- Nikki will create a branch off of credits.
