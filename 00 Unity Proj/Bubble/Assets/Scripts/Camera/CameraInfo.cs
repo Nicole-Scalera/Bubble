@@ -8,6 +8,7 @@
 // issues with it, leave it for now, we can create a new branch for that as needed.
 // -- Nikki
 
+using System;
 using UnityEngine;
 
 // This is the CameraInfo class. It encapsulates general data and info about
@@ -15,7 +16,10 @@ using UnityEngine;
 
 public class CameraInfo : MonoBehaviour
 {
-
+    // Create an instance of the GameManager so
+    // that we can easily access it anywhere
+    private static CameraInfo Instance;
+    
     // ===== Variables =====
     [SerializeField] private Vector2 cameraPosition; // Coordinates of the Camera (X,Y)
     // ^^^ Serializing to view
@@ -23,10 +27,25 @@ public class CameraInfo : MonoBehaviour
     private Camera camComponent; // Camera component attached to the GameObject
     // =====================
 
+    private void Awake()
+    {
+        // Ensure only one instance of GameManager exists
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // Persist across scenes
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
     // Get the Camera component on the object
     public Camera GetCameraComponent()
     {
-        camComponent = GetComponent<Camera>();
+        camComponent = gameObject.GetComponent<Camera>();
         return camComponent;
     }
 
