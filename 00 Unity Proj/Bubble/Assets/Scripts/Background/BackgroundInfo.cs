@@ -10,6 +10,27 @@ using UnityEngine;
 public class BackgroundInfo : MonoBehaviour
 {
 
+    // Singleton instance for global reference
+    private static BackgroundInfo _backgroundInfo;
+
+    // Constructor that forces only a single
+    // instance of BackgroundInfo to be created
+    public static BackgroundInfo Instance
+    {
+        get
+        {
+            // If BackgroundInfo instance is null, assign BackgroundInfo component
+            if (_backgroundInfo == null)
+            {
+                _backgroundInfo = GameObject.Find("Background").GetComponent<BackgroundInfo>();
+            }
+
+             // Return the BackgroundInfo instance
+            return _backgroundInfo;
+        }
+    }
+
+
     // ===== Variables =====
     private Camera eventCamera; // Event Camera attached to the Canvas
     private Vector2 canvasPosition; // Coordinates of the Canvas (X,Y)
