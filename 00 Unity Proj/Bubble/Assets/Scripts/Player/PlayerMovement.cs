@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private float moveSpeed; // Player's Horizontal Speed (Player-controlled)
     private float floatSpeed; // Player's Vertical Speed (Automatic)
     private GameObject playerGO;
+    private GameObject targetGO;
     // ================================
 
     private void Awake()
@@ -27,10 +28,10 @@ public class PlayerMovement : MonoBehaviour
         playerGO = GameObject.Find("Player"); // Assign GameObject
         playerInfo = playerGO.GetComponent<PlayerInfo>(); // Access PlayerInfo.cs
         GetPlayerInfo(); // Get the Player's info
-        playerControls = new PlayerControls(); // Access movement controls
+        playerControls = Player.Controls; // Access movement controls
 
         // ===== Target =====
-        GameObject targetGO = GameObject.Find("Target"); // Assign GameObject
+        targetGO = GameObject.Find("Target"); // Assign GameObject
         targetInfo = targetGO.GetComponent<TargetInfo>(); // Access TargetInfo.cs
         GetTargetInfo(); // Get the Target's info
     }
@@ -77,11 +78,11 @@ public class PlayerMovement : MonoBehaviour
         // Speed Vertical
         float step = floatSpeed * Time.deltaTime;
 
-        // Update the X coordinate
+        // Update the X coordinate based on player input
         float newX = playerControls.MoveHorizontal.Move.ReadValue<Vector2>().x;
 
-        // Update the Y coordinate | Move player towards target
-        float newY = Vector2.MoveTowards(playerPos, targetPos, step).y;
+        // Update the Y coordinate | Move player towards target at constant speed
+        float newY = Vector2.MoveTowards(new Vector2(0, playerPos.y), new Vector2(0, targetPos.y), step).y;
 
         // Set the Player's position to the new coordinates
         newPos = new Vector2(newX, newY);
@@ -95,8 +96,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
-        // Move the Player's Rigidbody2D component
-        playerRB.MovePosition(playerRB.position + playerPos * (moveSpeed * Time.fixedDeltaTime));
+        // Calculates the player's destination to move
+        // the playerRB at a constant speed with no acceleration
+        Vector2 destination = new Vector2(playerRB.position.x + playerPos.x * moveSpeed * Time.fixedDeltaTime, playerPos.y);
+        playerRB.MovePosition(destination);
     }
 
 }
