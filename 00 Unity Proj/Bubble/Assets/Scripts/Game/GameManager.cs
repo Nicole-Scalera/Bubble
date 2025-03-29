@@ -1,3 +1,4 @@
+// using Obvious.Soap.Example;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -5,10 +6,22 @@ public class GameManager : MonoBehaviour
     // Create an instance of the GameManager so
     // that we can easily access it anywhere
     public static GameManager Instance;
+    
+    public static PlayerControls playerControls;
 
+    // ===== Script References =====
+    public CameraInfo mainCameraInfo; // CameraInfo.cs
+    // =============================
+
+    // ===== Variables/Components =====
     // Create References to relevant GameObjects
-    public GameObject playerObject; // Player
-    public GameObject targetObject; // Target
+    private GameObject playerObject; // Player
+    private GameObject targetObject; // Target
+    private GameObject cameraGO; // Camera GameObject
+    private Camera mainCamera; // Actual Main Camera
+    private Vector2 mainCameraPos; // Camera's Current Location
+    // ================================
+
 
     private void Awake()
     {
@@ -23,15 +36,31 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        // ===== Player =====
+        Player player = Player.Character; // Access Player.cs
+
+        // ===== Target =====
         targetObject = GameObject.Find("Target"); // Assign Target GameObject
-        playerObject = GameObject.Find("Player"); // Assign Player GameObject
 
+        // ===== Main Camera =====
+        cameraGO = GameObject.Find("Main Camera"); // Assign Main Camera
+        mainCameraInfo = cameraGO.GetComponent<CameraInfo>(); // Access CameraInfo.cs
+        GetCameraInfo();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    // Get and assign camera information
+    public void GetCameraInfo()
     {
-
+        // Get the following information about the Camera
+        mainCamera = mainCameraInfo.GetCameraComponent(); // Camera Component
+        mainCameraPos = mainCameraInfo.GetCameraPosition(); // Camera's Position
     }
-    
+
+    void Update()
+    {
+        // For Debugging:
+        GetCameraInfo();
+        //Debug.Log($"GameManager.cs > Update(): Camera's position is ({mainCameraPos.x}, {mainCameraPos.y})");
+    }
+
 }

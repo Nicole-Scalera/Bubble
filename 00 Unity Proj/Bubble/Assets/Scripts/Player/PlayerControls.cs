@@ -94,6 +94,45 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""GameControls"",
+            ""id"": ""e5d68e70-5577-4c77-ad5a-3a1e22848220"",
+            ""actions"": [
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""a9873515-0274-47b3-a752-2d9f5f068710"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""5959e0e6-f7c2-41f2-89fc-46ed3cf0117d"",
+                    ""path"": ""<Keyboard>/pause"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""acb8a1ff-cef2-4ef0-bea0-bb383ee27c85"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -101,11 +140,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // MoveHorizontal
         m_MoveHorizontal = asset.FindActionMap("MoveHorizontal", throwIfNotFound: true);
         m_MoveHorizontal_Move = m_MoveHorizontal.FindAction("Move", throwIfNotFound: true);
+        // GameControls
+        m_GameControls = asset.FindActionMap("GameControls", throwIfNotFound: true);
+        m_GameControls_Pause = m_GameControls.FindAction("Pause", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
     {
         UnityEngine.Debug.Assert(!m_MoveHorizontal.enabled, "This will cause a leak and performance issues, PlayerControls.MoveHorizontal.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_GameControls.enabled, "This will cause a leak and performance issues, PlayerControls.GameControls.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -209,8 +252,58 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     }
     public MoveHorizontalActions @MoveHorizontal => new MoveHorizontalActions(this);
+
+    // GameControls
+    private readonly InputActionMap m_GameControls;
+    private List<IGameControlsActions> m_GameControlsActionsCallbackInterfaces = new List<IGameControlsActions>();
+    private readonly InputAction m_GameControls_Pause;
+    public struct GameControlsActions
+    {
+        private @PlayerControls m_Wrapper;
+        public GameControlsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Pause => m_Wrapper.m_GameControls_Pause;
+        public InputActionMap Get() { return m_Wrapper.m_GameControls; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GameControlsActions set) { return set.Get(); }
+        public void AddCallbacks(IGameControlsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_GameControlsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_GameControlsActionsCallbackInterfaces.Add(instance);
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
+        }
+
+        private void UnregisterCallbacks(IGameControlsActions instance)
+        {
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
+        }
+
+        public void RemoveCallbacks(IGameControlsActions instance)
+        {
+            if (m_Wrapper.m_GameControlsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IGameControlsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_GameControlsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_GameControlsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public GameControlsActions @GameControls => new GameControlsActions(this);
     public interface IMoveHorizontalActions
     {
         void OnMove(InputAction.CallbackContext context);
+    }
+    public interface IGameControlsActions
+    {
+        void OnPause(InputAction.CallbackContext context);
     }
 }
