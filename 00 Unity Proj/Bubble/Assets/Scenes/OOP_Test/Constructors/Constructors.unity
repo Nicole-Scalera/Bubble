@@ -152,6 +152,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58b91cebdac0ed847804be5a4305c92e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myCar:
+    speedX: 0
+    speedY: 0
+    color: 
+    highestSpeed: 0
 --- !u!212 &37706230
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -249,6 +254,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58b91cebdac0ed847804be5a4305c92e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myCar:
+    speedX: 0
+    speedY: 0
+    color: Red
+    highestSpeed: 0
 --- !u!212 &212864155
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -346,6 +356,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58b91cebdac0ed847804be5a4305c92e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myCar:
+    speedX: 0
+    speedY: 0
+    color: 
+    highestSpeed: 0
 --- !u!212 &971886898
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -510,6 +525,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58b91cebdac0ed847804be5a4305c92e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myCar:
+    speedX: 10
+    speedY: 0
+    color: 
+    highestSpeed: 0
 --- !u!1 &1367397557
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,6 +697,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58b91cebdac0ed847804be5a4305c92e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myCar:
+    speedX: 0
+    speedY: 0
+    color: 
+    highestSpeed: 0
 --- !u!212 &1396316096
 SpriteRenderer:
   m_ObjectHideFlags: 0
