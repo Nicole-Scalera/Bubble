@@ -11,12 +11,16 @@ public class Car
 {
 
     // Variables for the car
-    private float speedX;
-    private float speedY;
+    public float speedX;
+    public float speedY;
 
     public string color;
     public int highestSpeed;
 
+    public Car()
+    {
+
+    }
 
     // Car constructor, including the X & Y speeds,
     // the color, and the highest speed
@@ -33,7 +37,7 @@ public class Car
     public void PrintCarDetails()
     {
         Debug.Log("Speed X: " + speedX);
-        Debug.Log("Speed X: " + speedY);
+        Debug.Log("Speed Y: " + speedY);
         Debug.Log("Color: " + color);
         Debug.Log("HighestSpeed: " + highestSpeed);
     }
