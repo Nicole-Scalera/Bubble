@@ -7,12 +7,15 @@ using UnityEngine;
 
 public class CarTest : MonoBehaviour
 {
+
+    public Car car;
+
     void Start()
     {
         // Initialize myCar with the following values
         // in the Car constructor in Car.cs
-        Car myCar = new Car(2.5f, 3.5f, "Red", 10);
-        myCar.PrintCarDetails(); // Print out the details regarding myCar
+        //Car myCar = new Car(2.5f, 3.5f, "Red", 10);
+        car.PrintCarDetails(); // Print out the details regarding myCar
     }
 
     // Update is called once per frame
