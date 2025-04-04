@@ -23,8 +23,10 @@ namespace DependencyInjection
                 //Get the Actors from the Database
                 //for now we are hard coded the actors
                 new Actor() { ID = 1, Name = "Pranaya", Department = "IT" },
+                //Debug.Log()
                 new Actor() { ID = 2, Name = "Kumar", Department = "HR" },
                 new Actor() { ID = 3, Name = "Rout", Department = "Payroll" }
+                
             };
             return ListActors;
         }
