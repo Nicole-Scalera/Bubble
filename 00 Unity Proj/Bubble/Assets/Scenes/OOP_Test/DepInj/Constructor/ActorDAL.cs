@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DependencyInjection
+namespace DependencyInjectionConstructor
 {
     //Service Class or Dependency Object
     //Dependency Object should be Interface-Based

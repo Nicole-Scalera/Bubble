@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DependencyInjection
+namespace DependencyInjectionConstructor
 {
     // This class will act as the Program file that will initiate everything
     public class Roster : MonoBehaviour
