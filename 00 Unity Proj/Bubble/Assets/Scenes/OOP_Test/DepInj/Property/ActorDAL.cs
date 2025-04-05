@@ -8,6 +8,7 @@ namespace DependencyInjectionProperty
     public interface IActorDAL
     {
         List<Actor> SelectAllActors();
+
     }
 
     //This is the class that is responsible for Interacting with the Database
@@ -25,7 +26,7 @@ namespace DependencyInjectionProperty
                 new Actor() { ID = 2, Name = "Kumar", Department = "HR" },
                 new Actor() { ID = 3, Name = "Rout", Department = "Payroll" }
             };
-            return ListActor;
+            return ListActors;
         }
     }
 }
