@@ -15,7 +15,7 @@ namespace DependencyInjectionProperty
             //Inject the Dependency Object using the Public Property of the Client Class
             actorBL.ActorDataObject = new ActorDAL();
 
-            List<Actor> ListActor = actorBL.GetAllEmployees();
+            List<Actor> ListActor = actorBL.GetAllActors();
             foreach (Actor act in ListActor)
             {
                 //Console.WriteLine($"ID = {act.ID}, Name = {act.Name}, Department = {act.Department}");
