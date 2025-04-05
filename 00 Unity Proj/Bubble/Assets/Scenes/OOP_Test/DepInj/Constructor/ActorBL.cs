@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DependencyInjection
+namespace DependencyInjectionConstructor
 {
     //Client Class or Dependent Object
     //This is the Class that is going to consume the services provided by the IActorDAL Class
