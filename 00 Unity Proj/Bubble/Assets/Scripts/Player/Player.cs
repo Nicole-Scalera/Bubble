@@ -1,30 +1,12 @@
 using System;
 using UnityEngine;
+using UnityCommunity.UnitySingleton;
 
 // This is the PlayerInfo class. It encapsulates general data and info about
 // the Player game object, which is utilized throughout other scripts.
 
-public class Player : MonoBehaviour
+public class Player : PersistentMonoSingleton<Player>
 {
-    // Singleton instance for global reference
-    private static Player _player;
-
-    // Constructor that forces only a single
-    // instance of Player to be created
-    public static Player Character
-    {
-        get
-        {
-            // If Player instance is null, assign Player component
-            if (_player == null)
-            {
-                _player = GameObject.Find("Player").GetComponent<Player>();
-            }
-
-             // Return the Player instance
-            return _player;
-        }
-    }
     
     // Singleton instance for global reference
     private static PlayerControls _controls;

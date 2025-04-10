@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         // ===== Player =====
-        player = Player.Character; // Access Player.cs
+        player = Player.Instance; // Access Player.cs
         GetPlayerInfo(); // Get the Player's info
         playerControls = Player.Controls; // Access movement controls
 
@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
         GetTargetInfo(); // Get the Target's info
     }
 
-    public void GetPlayerInfo()
+    private void GetPlayerInfo()
     {
         // Get the following information about the Player
         playerRB = player.GetRigidbody2D(); // RigidBody2D
@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log($"PlayerMovement.cs > GetPlayerInfo(): Player's vertical speed is {floatSpeed}");
     }
 
-    public void GetTargetInfo()
+    private void GetTargetInfo()
     {
         // Get the following information about the Target
         targetPos = targetInfo.GetTargetPosition(); // Target's Position
