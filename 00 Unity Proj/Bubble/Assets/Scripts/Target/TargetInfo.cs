@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityCommunity.UnitySingleton;
 
-public class TargetInfo : MonoBehaviour
+public class Target : PersistentMonoSingleton<Target>
 {
 
     // Variable to store the coordinates of the target (X,Y,Z)

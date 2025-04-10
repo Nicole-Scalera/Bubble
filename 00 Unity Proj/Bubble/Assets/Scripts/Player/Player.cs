@@ -29,10 +29,10 @@ public class Player : PersistentMonoSingleton<Player>
     }
     
     // ===== Variables =====
+    private Rigidbody2D playerRB; // Player's Rigidbody Component
     private Vector2 playerPosition; // Coordinates of the Player (X,Y)
     [SerializeField] public float moveSpeed; // Player's Horizontal Speed (Player-controlled)
     [SerializeField] private float floatSpeed; // Player's Vertical Speed (Automatic)
-    private Rigidbody2D playerRB; // Player's Rigidbody Component
     // =====================
 
     void Awake()
@@ -40,7 +40,7 @@ public class Player : PersistentMonoSingleton<Player>
         // Initialize Rigidbody2D
         playerRB = GetComponent<Rigidbody2D>();
     }
-
+    
     // Get the Player's location in the scene
     public Vector2 GetPlayerPosition()
     {
