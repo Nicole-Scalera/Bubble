@@ -4,9 +4,9 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     // ===== Script References =====
-    public TargetInfo targetInfo; // TargetInfo.cs
     private Player player; // Player.cs
     private PlayerControls playerControls; // PlayerControls.cs
+    private Target target; // Target.cs
     // =============================
 
     // ===== Variables/Components =====
@@ -28,8 +28,7 @@ public class PlayerMovement : MonoBehaviour
         playerControls = Player.Controls; // Access movement controls
 
         // ===== Target =====
-        targetGO = GameObject.Find("Target"); // Assign GameObject
-        targetInfo = targetGO.GetComponent<TargetInfo>(); // Access TargetInfo.cs
+        target = Target.Instance; // Access Player.cs
         GetTargetInfo(); // Get the Target's info
     }
 
@@ -50,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
     private void GetTargetInfo()
     {
         // Get the following information about the Target
-        targetPos = targetInfo.GetTargetPosition(); // Target's Position
+        targetPos = target.GetTargetPosition(); // Target's Position
         
         // Debug this info
         Debug.Log($"PlayerMovement.cs > GetTargetInfo(): Target's position is {targetPos}");
