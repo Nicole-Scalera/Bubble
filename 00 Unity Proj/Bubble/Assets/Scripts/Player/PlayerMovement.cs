@@ -24,12 +24,22 @@ public class PlayerMovement : MonoBehaviour
     {
         // ===== Player =====
         player = Player.Instance; // Access Player.cs
-        GetPlayerInfo(); // Get the Player's info
         playerControls = Player.Controls; // Access movement controls
 
         // ===== Target =====
-        target = Target.Instance; // Access Player.cs
+        target = Target.Instance; // Access Target.cs
+    }
+    
+    void Start()
+    {
+        GetPlayerInfo(); // Get the Player's info
         GetTargetInfo(); // Get the Target's info
+        
+        // When the script is called, grab the player's starting
+        // position and set it as the current position.
+        playerPos = startPos;
+        // The player's position will then
+        // continuously be updated in Update()
     }
 
     private void GetPlayerInfo()
@@ -55,14 +65,7 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log($"PlayerMovement.cs > GetTargetInfo(): Target's position is {targetPos}");
     }
 
-    void Start()
-    {
-        // When the script is called, grab the player's starting
-        // position and set it as the current position.
-        playerPos = startPos;
-        // The player's position will then
-        // continuously be updated in Update()
-    }
+
 
     private void OnEnable()
     {
