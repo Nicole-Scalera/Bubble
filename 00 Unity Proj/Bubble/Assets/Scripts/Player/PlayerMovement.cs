@@ -4,9 +4,9 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     // ===== Script References =====
-    public TargetInfo targetInfo; // TargetInfo.cs
     private Player player; // Player.cs
     private PlayerControls playerControls; // PlayerControls.cs
+    private Target target; // Target.cs
     // =============================
 
     // ===== Variables/Components =====
@@ -23,17 +23,26 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         // ===== Player =====
-        player = Player.Character; // Access Player.cs
-        GetPlayerInfo(); // Get the Player's info
+        player = Player.Instance; // Access Player.cs
         playerControls = Player.Controls; // Access movement controls
 
         // ===== Target =====
-        targetGO = GameObject.Find("Target"); // Assign GameObject
-        targetInfo = targetGO.GetComponent<TargetInfo>(); // Access TargetInfo.cs
+        target = Target.Instance; // Access Target.cs
+    }
+    
+    void Start()
+    {
+        GetPlayerInfo(); // Get the Player's info
         GetTargetInfo(); // Get the Target's info
+        
+        // When the script is called, grab the player's starting
+        // position and set it as the current position.
+        playerPos = startPos;
+        // The player's position will then
+        // continuously be updated in Update()
     }
 
-    public void GetPlayerInfo()
+    private void GetPlayerInfo()
     {
         // Get the following information about the Player
         playerRB = player.GetRigidbody2D(); // RigidBody2D
@@ -47,23 +56,16 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log($"PlayerMovement.cs > GetPlayerInfo(): Player's vertical speed is {floatSpeed}");
     }
 
-    public void GetTargetInfo()
+    private void GetTargetInfo()
     {
         // Get the following information about the Target
-        targetPos = targetInfo.GetTargetPosition(); // Target's Position
+        targetPos = target.GetTargetPosition(); // Target's Position
         
         // Debug this info
         Debug.Log($"PlayerMovement.cs > GetTargetInfo(): Target's position is {targetPos}");
     }
 
-    void Start()
-    {
-        // When the script is called, grab the player's starting
-        // position and set it as the current position.
-        playerPos = startPos;
-        // The player's position will then
-        // continuously be updated in Update()
-    }
+
 
     private void OnEnable()
     {

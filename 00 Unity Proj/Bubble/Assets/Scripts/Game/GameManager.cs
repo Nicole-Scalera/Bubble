@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
         }
 
         // ===== Player =====
-        Player player = Player.Character; // Access Player.cs
+        Player player = Player.Instance; // Access Player.cs
 
         // ===== Target =====
         targetObject = GameObject.Find("Target"); // Assign Target GameObject

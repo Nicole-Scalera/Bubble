@@ -1158,7 +1158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1165274843}
   - component: {fileID: 1165274848}
-  - component: {fileID: 1165274847}
+  - component: {fileID: 1165274850}
   - component: {fileID: 1165274846}
   - component: {fileID: 1165274845}
   - component: {fileID: 1165274844}
@@ -1260,21 +1260,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetInfo: {fileID: 0}
-  playerInfo: {fileID: 0}
---- !u!114 &1165274847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1165274842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b44400fb1d7bcf4392bf48be541562d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  floatSpeed: 5
 --- !u!212 &1165274848
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1340,6 +1325,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerLives: 0
+--- !u!114 &1165274850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165274842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7b37e4356a6b93488950d4e11917a93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UnparentOnAwake: 1
+  moveSpeed: 0
+  floatSpeed: 0
 --- !u!1 &1182851605
 GameObject:
   m_ObjectHideFlags: 0
