@@ -21,6 +21,7 @@ public class Player : PersistentMonoSingleton<Player>
             if (_controls == null)
             {
                 _controls = new PlayerControls(); // Access movement controls
+                _controls.Enable();
             }
 
             // Return the PlayerControls instance
