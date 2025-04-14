@@ -65,13 +65,6 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log($"PlayerMovement.cs > GetTargetInfo(): Target's position is {targetPos}");
     }
 
-
-
-    private void OnEnable()
-    {
-        playerControls.Enable();
-    }
-
     void Update()
     {
         // Speed Vertical

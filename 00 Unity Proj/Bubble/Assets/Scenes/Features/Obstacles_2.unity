@@ -786,6 +786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04e06aaa805ae584283d19659c0ce447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UnparentOnAwake: 1
 --- !u!212 &797988703
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1259,7 +1260,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486fa77e3d2f058489a8d6f16e5c70fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetInfo: {fileID: 0}
 --- !u!212 &1165274848
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1338,8 +1338,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnparentOnAwake: 1
-  moveSpeed: 0
-  floatSpeed: 0
+  moveSpeed: 3
+  floatSpeed: 3
 --- !u!1 &1182851605
 GameObject:
   m_ObjectHideFlags: 0
