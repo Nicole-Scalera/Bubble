@@ -1969,9 +1969,10 @@ GameObject:
   - component: {fileID: 1165274848}
   - component: {fileID: 1165274850}
   - component: {fileID: 1165274846}
+  - component: {fileID: 1165274849}
+  - component: {fileID: 1165274851}
   - component: {fileID: 1165274845}
   - component: {fileID: 1165274844}
-  - component: {fileID: 1165274849}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2146,8 +2147,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnparentOnAwake: 1
-  moveSpeed: 3
-  floatSpeed: 3
+  moveSpeed: 7
+  floatSpeed: 7
+--- !u!114 &1165274851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165274842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d2cb71eb72eef24c9214d0762fba849, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneChanger: {fileID: 0}
 --- !u!1 &1182851605
 GameObject:
   m_ObjectHideFlags: 0
@@ -4001,6 +4015,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1858419706}
+  - component: {fileID: 1858419707}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4023,6 +4038,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1858419707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858419704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7883b05f0450cc54a815b6c8f918eb8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1934345034
 GameObject:
   m_ObjectHideFlags: 0
