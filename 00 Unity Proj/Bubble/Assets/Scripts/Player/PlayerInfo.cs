@@ -19,7 +19,7 @@ public class PlayerInfo : MonoBehaviour
             // If Player instance is null, assign Player component
             if (_playerInfo == null)
             {
-                Player player = Player.Character; // Access Player.cs
+                Player player = Player.Instance; // Access Player.cs
                 _playerInfo = player.GetComponent<PlayerInfo>();
             }
 
