@@ -6,12 +6,14 @@ using UnityEngine.InputSystem.Android;
 
 public class PlayerRespawn : MonoBehaviour
 {
+    
+    private Player player; // Player.cs
+    
     // Reference to where the player intially starts off
     // in the beginning of the game
     private GameObject firstPlaySpawn;
-
-    // Reference to the Players body
-    private Rigidbody2D playerRb;
+    
+    private Rigidbody2D playerRB; // Rigidbody Component
 
     // Reference to the most immediate target that the
     // Player has to reach which will act as save points
@@ -37,7 +39,7 @@ public class PlayerRespawn : MonoBehaviour
     // right way for the player when loading into the game
     private void Awake()
     {
-        playerRb = GetComponent<Rigidbody2D>();
+        player = Player.Instance; // Access Player.cs
     }
 
     // Wanted to make sure that the Start Point of the
@@ -45,9 +47,11 @@ public class PlayerRespawn : MonoBehaviour
     // the main camera stays with the player
     public void Start()
     {
+        playerRB = player.GetRigidbody2D(); // RigidBody2D
+        
         firstPlaySpawn = GameObject.FindGameObjectWithTag("FirstStart");
 
-        firstPlaySpawn.transform.position = playerRb.transform.position;
+        firstPlaySpawn.transform.position = playerRB.transform.position;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -85,8 +89,8 @@ public class PlayerRespawn : MonoBehaviour
     // Further breaks down what happens during respawn
     IEnumerator RespawnCoroutine(float duration)
     {
-        playerRb.simulated = false;
-        playerRb.velocity = new UnityEngine.Vector2(0, 0);
+        playerRB.simulated = false;
+        playerRB.velocity = new UnityEngine.Vector2(0, 0);
         transform.localScale = new UnityEngine.Vector2(0, 0);
         yield return new WaitForSeconds(duration);
 
@@ -102,7 +106,7 @@ public class PlayerRespawn : MonoBehaviour
         // might be changing the scale of the character
         // after the first respawn of the player
         transform.localScale = new UnityEngine.Vector2(1, 1);
-        playerRb.simulated = true;
+        playerRB.simulated = true;
     }
     void UpdateCurrentRespawnLocation()
     {
