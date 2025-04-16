@@ -110,9 +110,7 @@ public class PauseMenu : MonoBehaviour, PlayerControls.IGameControlsActions
     // Call to Restart the game
     public void RestartGame()
     {
-        isPaused = false;
-        Time.timeScale = 1;
-        SceneManager.LoadScene(currentScene);
+        GameManager.Instance.RestartGame();
     }
 
     // Call to Quit the game

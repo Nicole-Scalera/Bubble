@@ -1,3 +1,4 @@
+using UnityCommunity.UnitySingleton;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,28 +7,8 @@ using UnityEngine.SceneManagement;
 // name in the Inspector, or create a line to manually assign
 // it through the code.
 
-public class SceneChanger : MonoBehaviour
+public class SceneChanger : PersistentMonoSingleton<SceneChanger>
 {
-
-    // Singleton instance for global reference
-    private static SceneChanger _sceneChanger;
-
-    // Constructor that forces only a single
-    // instance of SceneChanger to be created
-    public static SceneChanger Instance
-    {
-        get
-        {
-            // If Player instance is null, assign Player component
-            if (_sceneChanger == null)
-            {
-                _sceneChanger = new SceneChanger(); // Assign SceneChanger
-            }
-
-            // Return the SceneChanger instance
-            return _sceneChanger;
-        }
-    }
 
     // Current instance of the sceneName
     private string sceneName;
