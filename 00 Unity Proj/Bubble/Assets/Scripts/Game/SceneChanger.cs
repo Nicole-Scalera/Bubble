@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 // name in the Inspector, or create a line to manually assign
 // it through the code.
 
-public class SceneChanger : PersistentMonoSingleton<SceneChanger>
+public class SceneChanger : MonoSingleton<SceneChanger>
 {
 
     // Current instance of the sceneName
