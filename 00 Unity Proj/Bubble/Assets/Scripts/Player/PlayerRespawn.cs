@@ -33,6 +33,6 @@ public class PlayerRespawn : MonoBehaviour
     {
         // Call the RestartGame() method
         // from the GameManager
-        GameManager.Instance.RestartGame();
+        gameManager.RestartGame();
     }
 }
