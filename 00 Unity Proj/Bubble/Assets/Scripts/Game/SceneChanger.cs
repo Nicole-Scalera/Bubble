@@ -1,3 +1,4 @@
+using UnityCommunity.UnitySingleton;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,45 +7,32 @@ using UnityEngine.SceneManagement;
 // name in the Inspector, or create a line to manually assign
 // it through the code.
 
-public class SceneChanger : MonoBehaviour
+public class SceneChanger : MonoSingleton<SceneChanger>
 {
+    
+    // ===== Variables/Components =====
+    private GameManager gameManager; // Access GameManager.cs
+    private string sceneName; // Name of a scene
+    // ================================
 
-    // Singleton instance for global reference
-    private static SceneChanger _sceneChanger;
-
-    // Constructor that forces only a single
-    // instance of SceneChanger to be created
-    public static SceneChanger Instance
+    protected override void Awake()
     {
-        get
-        {
-            // If Player instance is null, assign Player component
-            if (_sceneChanger == null)
-            {
-                _sceneChanger = new SceneChanger(); // Assign SceneChanger
-            }
-
-            // Return the SceneChanger instance
-            return _sceneChanger;
-        }
+        gameManager = GameManager.Instance; // Assign GameManager.cs
     }
 
-    // Current instance of the sceneName
-    private string sceneName;
-
-    // Load a scene
+    // Load a scene by name (set name in Inspector)
     public void LoadScene(string sceneName)
     {
         this.sceneName = sceneName;
-    //  ^^^
-    //  Use keyword "this" assign the name
-    //  to the specific instance of sceneName
-
+        
         // Tell the user what scene is being loaded
-        Debug.Log($"Loading scene: {sceneName}");
+        Debug.Log($"SceneChanger > Loading scene: {sceneName}");
         
         // Load a scene by its name
         SceneManager.LoadScene(sceneName);
+        
+        //  Confirm the scene was loaded
+        Debug.Log($"SceneChanger > Scene Loaded: {sceneName}");
     }
     
     // Get the current scene
@@ -53,5 +41,23 @@ public class SceneChanger : MonoBehaviour
         // Grab the scene by its name
         return SceneManager.GetActiveScene().name;
     }
+    
+    // Call sceneLoaded when a new scene is loaded
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // Notify the GameManager of the new "current" scene name
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        gameManager.UpdateCurrentScene(scene.name);
+    }
+    
     
 }

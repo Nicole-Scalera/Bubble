@@ -1,13 +1,14 @@
 // using Obvious.Soap.Example;
+using UnityCommunity.UnitySingleton;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : PersistentMonoSingleton<GameManager>
 {
-    // Create an instance of the GameManager so
-    // that we can easily access it anywhere
-    public static GameManager Instance;
-    
+    private Player player;
+    private SceneChanger sceneChanger; // Player.cs
     public static PlayerControls playerControls;
+    private string currentScene; // Current Scene Name
 
     // ===== Script References =====
     public CameraInfo mainCameraInfo; // CameraInfo.cs
@@ -16,36 +17,27 @@ public class GameManager : MonoBehaviour
     // ===== Variables/Components =====
     // Create References to relevant GameObjects
     private GameObject playerObject; // Player
-    private GameObject targetObject; // Target
     private GameObject cameraGO; // Camera GameObject
     private Camera mainCamera; // Actual Main Camera
     private Vector2 mainCameraPos; // Camera's Current Location
     // ================================
+    
+    private bool isPaused = false; // Boolean to check if game is paused
 
 
     private void Awake()
     {
-        // Ensure only one instance of GameManager exists
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); // Persist across scenes
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
-        // ===== Player =====
-        Player player = Player.Instance; // Access Player.cs
-
-        // ===== Target =====
-        targetObject = GameObject.Find("Target"); // Assign Target GameObject
+        // ===== References =====
+        player = Player.Instance; // Access Player.cs
+        sceneChanger = SceneChanger.Instance; // Access SceneChanger.cs
 
         // ===== Main Camera =====
         cameraGO = GameObject.Find("Main Camera"); // Assign Main Camera
         mainCameraInfo = cameraGO.GetComponent<CameraInfo>(); // Access CameraInfo.cs
         GetCameraInfo();
+        
+        // Get the name of the current scene
+        currentScene = SceneChanger.Instance.GetCurrentSceneName();
     }
 
     // Get and assign camera information
@@ -61,6 +53,20 @@ public class GameManager : MonoBehaviour
         // For Debugging:
         GetCameraInfo();
         //Debug.Log($"GameManager.cs > Update(): Camera's position is ({mainCameraPos.x}, {mainCameraPos.y})");
+    }
+    
+    public void RestartGame()
+    {
+        isPaused = false;
+        Time.timeScale = 1;
+        SceneManager.LoadScene(currentScene);
+    }
+
+    // Update the current scene name everytime a new scene is loaded
+    public void UpdateCurrentScene(string sceneName)
+    {
+        currentScene = sceneName;
+        Debug.Log($"GameManager: Current scene is: " + currentScene);
     }
 
 }

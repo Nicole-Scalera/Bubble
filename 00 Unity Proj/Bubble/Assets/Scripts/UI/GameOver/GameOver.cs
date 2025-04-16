@@ -59,18 +59,18 @@ public class GameOver : MonoBehaviour
     }
     void Update()
     {
-        livesPlayerHas = playerObject.GetComponent<PlayerRespawn>().playerLives;
-        
-        if (livesPlayerHas <= 0)
-        {
-            // Activate the Game Over Menu
-            gameOverMenu.SetActive(true);
-        }
-        else
-        {
-            // Deactivate the Game Over Menu if player has lives
-            gameOverMenu.SetActive(false);
-        }
+        // livesPlayerHas = playerObject.GetComponent<PlayerRespawn>().playerLives;
+        //
+        // if (livesPlayerHas <= 0)
+        // {
+        //     // Activate the Game Over Menu
+        //     gameOverMenu.SetActive(true);
+        // }
+        // else
+        // {
+        //     // Deactivate the Game Over Menu if player has lives
+        //     gameOverMenu.SetActive(false);
+        // }
     }
 
     // Toggle Menu

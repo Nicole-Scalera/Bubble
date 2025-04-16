@@ -31,6 +31,7 @@ public class Player : PersistentMonoSingleton<Player>
     
     // ===== Variables =====
     private Rigidbody2D playerRB; // Player's Rigidbody Component
+    private Vector2 startPos; // Player's Starting Position (X,Y)
     private Vector2 playerPosition; // Coordinates of the Player (X,Y)
     [SerializeField] public float moveSpeed; // Player's Horizontal Speed (Player-controlled)
     [SerializeField] private float floatSpeed; // Player's Vertical Speed (Automatic)
