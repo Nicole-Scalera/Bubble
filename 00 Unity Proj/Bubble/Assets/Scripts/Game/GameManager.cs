@@ -17,7 +17,6 @@ public class GameManager : PersistentMonoSingleton<GameManager>
     // ===== Variables/Components =====
     // Create References to relevant GameObjects
     private GameObject playerObject; // Player
-    private GameObject targetObject; // Target
     private GameObject cameraGO; // Camera GameObject
     private Camera mainCamera; // Actual Main Camera
     private Vector2 mainCameraPos; // Camera's Current Location
@@ -28,20 +27,17 @@ public class GameManager : PersistentMonoSingleton<GameManager>
 
     private void Awake()
     {
-        // ===== Player =====
+        // ===== References =====
         player = Player.Instance; // Access Player.cs
-
-        // ===== Target =====
-        targetObject = GameObject.Find("Target"); // Assign Target GameObject
+        sceneChanger = SceneChanger.Instance; // Access SceneChanger.cs
 
         // ===== Main Camera =====
         cameraGO = GameObject.Find("Main Camera"); // Assign Main Camera
         mainCameraInfo = cameraGO.GetComponent<CameraInfo>(); // Access CameraInfo.cs
         GetCameraInfo();
         
-        sceneChanger = SceneChanger.Instance;
+        // Get the name of the current scene
         currentScene = SceneChanger.Instance.GetCurrentSceneName();
-        
     }
 
     // Get and assign camera information
@@ -64,6 +60,13 @@ public class GameManager : PersistentMonoSingleton<GameManager>
         isPaused = false;
         Time.timeScale = 1;
         SceneManager.LoadScene(currentScene);
+    }
+
+    // Update the current scene name everytime a new scene is loaded
+    public void UpdateCurrentScene(string sceneName)
+    {
+        currentScene = sceneName;
+        Debug.Log($"GameManager: Current scene is: " + currentScene);
     }
 
 }
