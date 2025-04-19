@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : PersistentMonoSingleton<GameManager>
 {
-    private Player player;
-    private SceneChanger sceneChanger; // Player.cs
-    public static PlayerControls playerControls;
+    private Player player; // Player.cs
+    private SceneChanger sceneChanger; // SceneChanger.cs
+    public static PlayerControls playerControls; // PlayerControls.cs
     private string currentScene; // Current Scene Name
 
     // ===== Script References =====
