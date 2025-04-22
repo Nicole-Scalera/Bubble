@@ -8,9 +8,9 @@ public class House : PersistentMonoSingleton<House>
     
     // ===== Variables =====
     private Rigidbody2D houseRB; // House's Rigidbody Component
-    private Vector2 startPos; // Player's Starting Position (X,Y)
-    private Vector2 playerPosition; // Coordinates of the Player (X,Y)
-    [SerializeField] private float houseSpeed; // Player's Vertical Speed (Automatic)
+    private Vector2 startPos; // House's Starting Position (X,Y)
+    private Vector2 housePosition; // Coordinates of the House (X,Y)
+    [SerializeField] private float houseSpeed; // House's Vertical Speed (Automatic)
     // =====================
 
     void Awake()
@@ -22,8 +22,8 @@ public class House : PersistentMonoSingleton<House>
     // Get the House's location in the scene
     public Vector2 GetHousePosition()
     {
-        playerPosition = transform.position;
-        return playerPosition;
+        housePosition = transform.position;
+        return housePosition;
     }
 
     // Get the House's vertical movement speed
