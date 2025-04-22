@@ -56,12 +56,6 @@ public class Player : PersistentMonoSingleton<Player>
         return moveSpeed;
     }
 
-    // Get the Player's vertical movement speed
-    public float GetPlayerSpeedY()
-    {
-        return floatSpeed;
-    }
-
     // Get the Rigidbody2D component
     public Rigidbody2D GetRigidbody2D()
     {
