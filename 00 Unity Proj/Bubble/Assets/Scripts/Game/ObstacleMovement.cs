@@ -5,34 +5,27 @@ using UnityEngine;
 
 public class ObstacleMovement : MonoBehaviour
 {
-    // Speed at which the obstacle will move from one point to another
     [SerializeField] private float speed;
-    
-    // Tells the obstacle where the movement starts from
-    public int startingPoint;
-    
-    // Tells the obstacle which positions or points that the obstacle will
-    // travel between, if wanted could use this in the inspector within Unity
-    // to vary the movement or direction that the obstacle takes
-    public Transform[] points;
-    
-    // Helps to make the obstacle continuously move throughout the duration of the scene open
-    private int i;
+    private Rigidbody2D obstacleRB;
+
     private void Awake()
     {
-        // This is to make sure that the obstacle moves as soon as the game is launched
-        transform.position = points[startingPoint].position;
+        obstacleRB = GetComponent<Rigidbody2D>();
     }
-    void Update()
+    void FixedUpdate()
     {
-        if (UnityEngine.Vector2.Distance(transform.position, points[i].position) < 0.05f)
-        {
-            i++;
-            if (i == points.Length)
-            {
-                i = 0;
-            }
-        } // All of this forces the obstacles to move
-        transform.position = UnityEngine.Vector2.MoveTowards(transform.position, points[i].position, speed* Time.deltaTime); // Makes it this movement continue
+        // Move the Rigidbody to the next point
+        obstacleRB.velocity = new Vector2 (speed, 0f);
     }
+    
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Barrier"))
+        {
+            // Reverse the movement speed in
+            // the opposite direction
+            speed = -speed;
+        }
+    }
+    
 }
