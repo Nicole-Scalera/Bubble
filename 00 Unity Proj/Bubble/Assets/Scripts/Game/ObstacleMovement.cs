@@ -6,7 +6,7 @@ using UnityEngine;
 public class ObstacleMovement : MonoBehaviour
 {
     // Speed at which the obstacle will move from one point to another
-    public float speed;
+    [SerializeField] private float speed;
     
     // Tells the obstacle where the movement starts from
     public int startingPoint;

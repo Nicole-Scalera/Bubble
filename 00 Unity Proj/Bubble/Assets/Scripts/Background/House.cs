@@ -4,8 +4,6 @@ using UnityCommunity.UnitySingleton;
 
 public class House : PersistentMonoSingleton<House>
 {
-    
-    
     // ===== Variables =====
     private Rigidbody2D houseRB; // House's Rigidbody Component
     private Vector2 startPos; // House's Starting Position (X,Y)
