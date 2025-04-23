@@ -20,16 +20,15 @@ public class HouseMovement : MovableProp
         house = House.Instance; // Access House.cs
     }
     
-    // Get info about the House
+    // Get the following information about the House
     public override void GetPropInfo()
     {
-        // Get the following information about the House
+        propName = house.GetHouseName(); // House Name
         rb = house.GetRigidbody2D(); // RigidBody2D
         startPos = house.GetHousePosition(); // Starting Position
-        speed = house.GetHouseSpeed(); // Horizontal Speed
+        speedY = house.GetHouseSpeed(); // Horizontal Speed
 
-        // Debug this info
-        Debug.Log($"HouseMovement.cs > GetHouseInfo(): House's starting position is ({startPos.x}, {startPos.y})");
-        Debug.Log($"HouseMovement.cs > GetHouseInfo(): House's movement speed is {speed}");
+        // Debug info about prop (called from MovableProp.cs)
+        DebugPropInfo();
     }
 }

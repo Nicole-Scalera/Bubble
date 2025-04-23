@@ -5,11 +5,12 @@ using UnityCommunity.UnitySingleton;
 public class Obstacle : PersistentMonoSingleton<Obstacle>
 {
     // ===== Variables =====
+    private string obstacleName; // Name of the GameObject
     private Rigidbody2D obstaclesRB; // Obstacles' Rigidbody Component
     private Vector2 startPos; // Obstacles' Starting Position (X,Y)
     private Vector2 obstaclesPosition; // Coordinates of the Obstacles (X,Y)
-    [SerializeField] private float obstaclesSpeed; // Obstacles' Vertical Speed (Automatic)
-    private string obstacleName; // Name of the GameObject
+    [SerializeField] private float obstacleSpeedX; // Obstacles' Horizontal Speed
+    [SerializeField] private float obstacleSpeedY; // Obstacles' Vertical Speed
     // =====================
 
     void Awake()
@@ -27,17 +28,29 @@ public class Obstacle : PersistentMonoSingleton<Obstacle>
         Debug.Log($"Obstacle Name: {obstacleName}");
     }
     
+    // Get the Obstacles' name
+    public String GetObstacleName()
+    {
+        return obstacleName;
+    }
+    
     // Get the Obstacles' location in the scene
-    public Vector2 GetObstaclesPosition()
+    public Vector2 GetObstaclePosition()
     {
         obstaclesPosition = transform.position;
         return obstaclesPosition;
     }
 
-    // Get the Obstacles' vertical movement speed
-    public float GetObstaclesSpeed()
+    // Get the Obstacles' horizontal movement speed
+    public float GetObstacleSpeedX()
     {
-        return obstaclesSpeed;
+        return obstacleSpeedX;
+    }
+    
+    // Get the Obstacles' vertical movement speed
+    public float GetObstacleSpeedY()
+    {
+        return obstacleSpeedY;
     }
 
     // Get the Rigidbody2D component

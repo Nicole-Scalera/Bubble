@@ -3,19 +3,37 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ObstacleMovement : MonoBehaviour
+public class ObstacleMovement : MovableProp
 {
-    [SerializeField] private float speed;
-    private Rigidbody2D obstacleRB;
+    private Obstacle obstacle; // Obstacle.cs
 
-    private void Awake()
+    // Override Awake() in MovableProp.cs
+    protected override void Awake()
     {
-        obstacleRB = GetComponent<Rigidbody2D>();
+        // ===== Target =====
+        base.Awake(); // Target initialized in base class
+
+        // ===== Obstacle =====
+        obstacle = Obstacle.Instance; // Access Obstacle.cs
     }
-    void FixedUpdate()
+    
+    // Get the following information about the Obstacle
+    public override void GetPropInfo()
+    {
+        propName = obstacle.GetObstacleName();
+        rb = obstacle.GetRigidbody2D(); // RigidBody2D
+        startPos = obstacle.GetObstaclePosition(); // Starting Position
+        speedX = obstacle.GetObstacleSpeedX(); // Horizontal Speed
+        speedY = obstacle.GetObstacleSpeedY(); // Vertical Speed
+
+        // Debug info about prop (called from MovableProp.cs)
+        DebugPropInfo();
+    }
+    
+    public override void Move()
     {
         // Move the Rigidbody to the next point
-        obstacleRB.velocity = new Vector2 (speed, 0f);
+        rb.velocity = new Vector2 (speedX, 0f);
     }
     
     void OnTriggerEnter2D(Collider2D other)
@@ -24,8 +42,7 @@ public class ObstacleMovement : MonoBehaviour
         {
             // Reverse the movement speed in
             // the opposite direction
-            speed = -speed;
+            speedX = -speedX;
         }
     }
-    
 }

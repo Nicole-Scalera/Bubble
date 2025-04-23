@@ -320,7 +320,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnparentOnAwake: 1
-  obstaclesSpeed: 0
+  obstacleSpeedX: 0
+  obstacleSpeedY: 0
 --- !u!1 &161316260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1368,7 +1369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b5a268e10609414d8b6599cb6937a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  moveSpeed: 0
 --- !u!212 &834950364
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1434,7 +1435,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnparentOnAwake: 1
-  obstaclesSpeed: 0
+  obstacleSpeedX: 0
+  obstacleSpeedY: 0
 --- !u!1 &1126088015
 GameObject:
   m_ObjectHideFlags: 0
@@ -2196,7 +2198,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnparentOnAwake: 1
-  obstaclesSpeed: 0
+  obstacleSpeedX: 0
+  obstacleSpeedY: 0
 --- !u!1 &1299666904
 GameObject:
   m_ObjectHideFlags: 0
@@ -2596,7 +2599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b5a268e10609414d8b6599cb6937a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
+  moveSpeed: 0
 --- !u!212 &1356904803
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2662,7 +2665,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnparentOnAwake: 1
-  obstaclesSpeed: 0
+  obstacleSpeedX: 0
+  obstacleSpeedY: 0
 --- !u!1 &1545510169
 GameObject:
   m_ObjectHideFlags: 0
@@ -2843,7 +2847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b5a268e10609414d8b6599cb6937a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  moveSpeed: 0
 --- !u!212 &1555329630
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3007,7 +3011,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnparentOnAwake: 1
-  obstaclesSpeed: 0
+  obstacleSpeedX: 0
+  obstacleSpeedY: 0
 --- !u!1 &1703531112
 GameObject:
   m_ObjectHideFlags: 0
@@ -3131,7 +3136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b5a268e10609414d8b6599cb6937a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  moveSpeed: 0
 --- !u!212 &1708710147
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3295,7 +3300,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnparentOnAwake: 1
-  obstaclesSpeed: 0
+  obstacleSpeedX: 5
+  obstacleSpeedY: 4
 --- !u!1 &1736546672
 GameObject:
   m_ObjectHideFlags: 0
