@@ -16,16 +16,10 @@ public class ObstacleMovement : MonoBehaviour
     // to vary the movement or direction that the obstacle takes
     public Transform[] points;
     
-    // References the Rigidbody of the player to store for later
-    Rigidbody2D playerRigidBody;
-    
     // Helps to make the obstacle continuously move throughout the duration of the scene open
     private int i;
     private void Awake()
     {
-        // Tbh I don't exactly remember why I used this for
-        playerRigidBody = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
-        
         // This is to make sure that the obstacle moves as soon as the game is launched
         transform.position = points[startingPoint].position;
     }
