@@ -3,42 +3,77 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ObstacleMovement : MonoBehaviour
+public class ObstacleMovement : MovableProp
 {
-    // Speed at which the obstacle will move from one point to another
-    [SerializeField] private float speed;
-    
-    // Tells the obstacle where the movement starts from
-    public int startingPoint;
-    
-    // Tells the obstacle which positions or points that the obstacle will
-    // travel between, if wanted could use this in the inspector within Unity
-    // to vary the movement or direction that the obstacle takes
-    public Transform[] points;
-    
-    // References the Rigidbody of the player to store for later
-    Rigidbody2D playerRigidBody;
-    
-    // Helps to make the obstacle continuously move throughout the duration of the scene open
-    private int i;
-    private void Awake()
+    private Obstacle obstacle; // Obstacle.cs
+
+    // Override Awake() in MovableProp.cs
+    protected override void Awake()
     {
-        // Tbh I don't exactly remember why I used this for
-        playerRigidBody = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
-        
-        // This is to make sure that the obstacle moves as soon as the game is launched
-        transform.position = points[startingPoint].position;
+        // ===== Target =====
+        base.Awake(); // Target initialized in base class
+
+        // ===== Obstacle =====
+        // obstacle = Obstacle.Instance; // Access Obstacle.cs
+        obstacle = GetComponent<Obstacle>(); // Access Obstacle.cs
     }
-    void Update()
+    
+    // Get the following information about the Obstacle
+    public override void GetPropInfo()
     {
-        if (UnityEngine.Vector2.Distance(transform.position, points[i].position) < 0.05f)
+        propName = obstacle.GetObstacleName();
+        rb = obstacle.GetRigidbody2D(); // RigidBody2D
+        startPos = obstacle.GetObstaclePosition(); // Starting Position
+        speedX = obstacle.GetObstacleSpeedX(); // Horizontal Speed
+        speedY = obstacle.GetObstacleSpeedY(); // Vertical Speed
+
+        // Debug info about prop (called from MovableProp.cs)
+        DebugPropInfo();
+    }
+    
+    // public override void Move()
+    // {
+    //     // Move the Rigidbody to the next point
+    //     rb.velocity = new Vector2 (speedX, 0f);
+    // }
+    
+    // Update the prop's position continuously
+    public override void UpdatePosition()
+    {
+        base.UpdatePosition(); // Y-position updated in base class
+        
+        // Update the X-position via the Rigidbody velocity
+        //rb.velocity = new Vector2(speedX, rb.velocity.y);
+
+        // Update the current position
+        currentPos = new Vector2(rb.position.x, currentPos.y);
+    }
+
+    // Move the prop (call this in FixedUpdate())
+    public override void Move()
+    {
+        // Calculates the prop's destination to move its Rigidbody
+        // at a constant speed with no acceleration
+        // Vector2 destination = new Vector2(rb.position.x + currentPos.x * speedX * Time.fixedDeltaTime, rb.position.y + currentPos.y * speedY * Time.fixedDeltaTime);
+        // rb.MovePosition(destination);
+        
+        // speedY = -speedY; // Reverse the Y-axis movement
+        // // This is because positive velocity
+        // // is UP and negative velocity is DOWN
+        
+        Vector2 velocity = new Vector2(speedX, -speedY);
+        Vector2 destination = rb.position + velocity * Time.fixedDeltaTime;
+        rb.MovePosition(destination);
+    }
+    
+    // Collision with Scene Barriers
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Barrier"))
         {
-            i++;
-            if (i == points.Length)
-            {
-                i = 0;
-            }
-        } // All of this forces the obstacles to move
-        transform.position = UnityEngine.Vector2.MoveTowards(transform.position, points[i].position, speed* Time.deltaTime); // Makes it this movement continue
+            // Reverse the movement speed in
+            // the opposite direction
+            speedX = -speedX;
+        }
     }
 }
