@@ -5,15 +5,29 @@ using UnityEngine;
 
 public class ObstacleMovement : MonoBehaviour
 {
-    public float speed; // Speed at which the obstacle will move from one point to another
-    public int startingPoint; // Tells the obstacle where the movement starts from
-    public Transform[] points; // Tells the obstacle which positions or points that the obstacle will travel between, if wanted could use this in the inspector within Unity to vary the movement or direction that the obstacle takes
-    Rigidbody2D playerRigidBody; // References the Rigidbody of the player to store for later
-    private int i; // Helps to make the obstacle continuously move throughout the duration of the scene open
+    // Speed at which the obstacle will move from one point to another
+    [SerializeField] private float speed;
+    
+    // Tells the obstacle where the movement starts from
+    public int startingPoint;
+    
+    // Tells the obstacle which positions or points that the obstacle will
+    // travel between, if wanted could use this in the inspector within Unity
+    // to vary the movement or direction that the obstacle takes
+    public Transform[] points;
+    
+    // References the Rigidbody of the player to store for later
+    Rigidbody2D playerRigidBody;
+    
+    // Helps to make the obstacle continuously move throughout the duration of the scene open
+    private int i;
     private void Awake()
     {
-        playerRigidBody = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>(); // Tbh I don't exactly remember why I used this for
-        transform.position = points[startingPoint].position; // This is to make sure that the obstacle moves as soon as the game is launched
+        // Tbh I don't exactly remember why I used this for
+        playerRigidBody = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+        
+        // This is to make sure that the obstacle moves as soon as the game is launched
+        transform.position = points[startingPoint].position;
     }
     void Update()
     {
