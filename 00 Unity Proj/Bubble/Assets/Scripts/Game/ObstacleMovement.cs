@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class ObstacleMovement : MovableProp
 {
+    // ===== Script References =====
     private Obstacle obstacle; // Obstacle.cs
+    // =============================
 
     // Override Awake() in MovableProp.cs
     protected override void Awake()
@@ -14,7 +16,6 @@ public class ObstacleMovement : MovableProp
         base.Awake(); // Target initialized in base class
 
         // ===== Obstacle =====
-        // obstacle = Obstacle.Instance; // Access Obstacle.cs
         obstacle = GetComponent<Obstacle>(); // Access Obstacle.cs
     }
     
@@ -31,12 +32,6 @@ public class ObstacleMovement : MovableProp
         DebugPropInfo();
     }
     
-    // public override void Move()
-    // {
-    //     // Move the Rigidbody to the next point
-    //     rb.velocity = new Vector2 (speedX, 0f);
-    // }
-    
     // Update the prop's position continuously
     public override void UpdatePosition()
     {
@@ -52,17 +47,16 @@ public class ObstacleMovement : MovableProp
     // Move the prop (call this in FixedUpdate())
     public override void Move()
     {
-        // Calculates the prop's destination to move its Rigidbody
-        // at a constant speed with no acceleration
-        // Vector2 destination = new Vector2(rb.position.x + currentPos.x * speedX * Time.fixedDeltaTime, rb.position.y + currentPos.y * speedY * Time.fixedDeltaTime);
-        // rb.MovePosition(destination);
-        
-        // speedY = -speedY; // Reverse the Y-axis movement
-        // // This is because positive velocity
-        // // is UP and negative velocity is DOWN
-        
+        // Calculate the new position
         Vector2 velocity = new Vector2(speedX, -speedY);
+        // The Y-axis movement is reversed because positive
+        // velocity is UP and negative velocity is DOWN,
+        // and DOWNWARDS is where the Target is
+        
+        // Calculate the destination position
         Vector2 destination = rb.position + velocity * Time.fixedDeltaTime;
+        
+        // Move the Rigidbody to the new position
         rb.MovePosition(destination);
     }
     
