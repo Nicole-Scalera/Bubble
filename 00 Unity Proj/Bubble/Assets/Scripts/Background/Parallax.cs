@@ -5,7 +5,7 @@ public class Parallax : MonoBehaviour
 {
 
     // ===== Script References =====
-    private BackgroundInfo backgroundInfo; // BackgroundInfo.cs
+    private Background background; // BackgroundInfo.cs
     // =============================
 
     // ===== Variables/Components =====
@@ -22,16 +22,16 @@ public class Parallax : MonoBehaviour
     {
         // ===== Canvas =====
         backgroundGO = GameObject.Find("Background Canvas"); // Assign GameObject
-        backgroundInfo = backgroundGO.GetComponent<BackgroundInfo>(); // Access BackgroundInfo.cs
+        background = backgroundGO.GetComponent<Background>(); // Access BackgroundInfo.cs
         GetCanvasInfo(); // Get the Canvas' info
     }
 
     public void GetCanvasInfo()
     {
         // Get the following information about the Background Canvas
-        cam = backgroundInfo.GetEventCamera(); // Event Camera
-        startPos = backgroundInfo.GetCanvasPosition(); // Starting Position
-        parallaxOffset = backgroundInfo.GetParallaxOffset(); // Parallax Offset
+        cam = background.GetEventCamera(); // Event Camera
+        startPos = background.GetCanvasPosition(); // Starting Position
+        parallaxOffset = background.GetParallaxOffset(); // Parallax Offset
 
         // Debug this info
         Debug.Log($"Parallax.cs > GetBackgroundInfo(): Event Camera for Background Canvas is {cam.name}");

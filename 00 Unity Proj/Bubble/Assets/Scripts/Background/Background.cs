@@ -7,26 +7,26 @@ using UnityEngine;
 // which is the actual item moving throughout the scene. This is to maintain an even
 // aspect ratio.
 
-public class BackgroundInfo : MonoBehaviour
+public class Background : MonoBehaviour
 {
 
     // Singleton instance for global reference
-    private static BackgroundInfo _backgroundInfo;
+    private static Background _background;
 
     // Constructor that forces only a single
     // instance of BackgroundInfo to be created
-    public static BackgroundInfo Instance
+    public static Background Instance
     {
         get
         {
             // If BackgroundInfo instance is null, assign BackgroundInfo component
-            if (_backgroundInfo == null)
+            if (_background == null)
             {
-                _backgroundInfo = GameObject.Find("Background").GetComponent<BackgroundInfo>();
+                _background = GameObject.Find("Background").GetComponent<Background>();
             }
 
              // Return the BackgroundInfo instance
-            return _backgroundInfo;
+            return _background;
         }
     }
 
