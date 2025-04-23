@@ -1,61 +1,56 @@
+using System;
 using UnityEngine;
+using UnityCommunity.UnitySingleton;
 
-// This is the BackgroundInfo class. It encapsulates general data and info about
+// This is the Background class. It encapsulates general data and info about
 // the Background game object, which is utilized throughout other scripts.
-//
-// Note that the game art for the background is controlled through a canvas object,
-// which is the actual item moving throughout the scene. This is to maintain an even
-// aspect ratio.
 
 public class Background : MonoBehaviour
-{
-
-    // Singleton instance for global reference
-    private static Background _background;
-
-    // Constructor that forces only a single
-    // instance of BackgroundInfo to be created
-    public static Background Instance
-    {
-        get
-        {
-            // If BackgroundInfo instance is null, assign BackgroundInfo component
-            if (_background == null)
-            {
-                _background = GameObject.Find("Background").GetComponent<Background>();
-            }
-
-             // Return the BackgroundInfo instance
-            return _background;
-        }
-    }
-
-
+{    
     // ===== Variables =====
-    private Camera eventCamera; // Event Camera attached to the Canvas
-    private Vector2 canvasPosition; // Coordinates of the Canvas (X,Y)
+    private string backgroundName; // Name of the GameObject
+    private Rigidbody2D backgroundRB; // Background's Rigidbody Component
+    private Vector2 startPos; // Background's Starting Position (X,Y)
+    private Vector2 backgroundPosition; // Coordinates of the background (X,Y)
+    [SerializeField] private float backgroundSpeed; // background's Vertical Speed (Automatic)
     [SerializeField] private float parallaxOffset; // Parallax Offset of the Canvas
-
     // =====================
+
+    void Awake()
+    {
+        // Initialize Rigidbody2D
+        backgroundRB = GetComponent<Rigidbody2D>();
+    }
     
-    // Get the Canvas' Event Camera
-    public Camera GetEventCamera()
+    void Start()
     {
-        eventCamera = GetComponent<Canvas>().worldCamera;
-        return eventCamera;
+        // Get the name of the GameObject
+        backgroundName = gameObject.name;
+    }
+    
+    // Get the background's name
+    public String GetBackgroundName()
+    {
+        return backgroundName;
+    }
+    
+    // Get the background's location in the scene
+    public Vector2 GetBackgroundPosition()
+    {
+        backgroundPosition = transform.position;
+        return backgroundPosition;
     }
 
-    // Get the Canvas' location in the scene
-    public Vector2 GetCanvasPosition()
+    // Get the background's vertical movement speed
+    public float GetBackgroundSpeed()
     {
-        // Get the Canvas' position from the Transform component
-        canvasPosition = transform.position;
-        return canvasPosition; // Return the position in a Vector2 for any time this method is called
+        return backgroundSpeed;
     }
 
-    // Get the Canvas' vertical movement speed
-    public float GetParallaxOffset()
+    // Get the Rigidbody2D component
+    public Rigidbody2D GetRigidbody2D()
     {
-        return parallaxOffset;
+        return backgroundRB;
     }
+
 }
