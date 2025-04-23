@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 // This class defines the overall process of props moving towards
-// a target object  in the scene. It is inherited by other classes
+// a target object in the scene. It is inherited by other classes
 // that implement the class and the IMovable interface.
 
 public abstract class MovableProp : MonoBehaviour, IMovable

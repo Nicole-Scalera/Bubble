@@ -8,6 +8,7 @@ TagManager:
   - TargetReached
   - Camera
   - FirstStart
+  - Barrier
   layers:
   - Default
   - TransparentFX
