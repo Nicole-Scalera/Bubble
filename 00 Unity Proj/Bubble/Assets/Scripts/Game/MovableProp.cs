@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 // This class defines the overall process of props moving towards
@@ -59,7 +60,7 @@ public abstract class MovableProp : MonoBehaviour, IMovable
         Debug.Log($"Target's position is {targetPos}");
     }
 
-    public void Update()
+    public virtual void Update()
     {
         UpdatePosition();
     }
@@ -90,6 +91,15 @@ public abstract class MovableProp : MonoBehaviour, IMovable
         // at a constant speed with no acceleration
         Vector2 destination = new Vector2(rb.position.x + currentPos.x * speedX * Time.fixedDeltaTime, currentPos.y);
         rb.MovePosition(destination);
+    }
+
+    // Destroy when reaching the Target Object
+    public virtual void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Target"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
 

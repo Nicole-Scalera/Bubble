@@ -14,7 +14,8 @@ public class ObstacleMovement : MovableProp
         base.Awake(); // Target initialized in base class
 
         // ===== Obstacle =====
-        obstacle = Obstacle.Instance; // Access Obstacle.cs
+        // obstacle = Obstacle.Instance; // Access Obstacle.cs
+        obstacle = GetComponent<Obstacle>(); // Access Obstacle.cs
     }
     
     // Get the following information about the Obstacle
@@ -30,12 +31,42 @@ public class ObstacleMovement : MovableProp
         DebugPropInfo();
     }
     
+    // public override void Move()
+    // {
+    //     // Move the Rigidbody to the next point
+    //     rb.velocity = new Vector2 (speedX, 0f);
+    // }
+    
+    // Update the prop's position continuously
+    public override void UpdatePosition()
+    {
+        base.UpdatePosition(); // Y-position updated in base class
+        
+        // Update the X-position via the Rigidbody velocity
+        //rb.velocity = new Vector2(speedX, rb.velocity.y);
+
+        // Update the current position
+        currentPos = new Vector2(rb.position.x, currentPos.y);
+    }
+
+    // Move the prop (call this in FixedUpdate())
     public override void Move()
     {
-        // Move the Rigidbody to the next point
-        rb.velocity = new Vector2 (speedX, 0f);
+        // Calculates the prop's destination to move its Rigidbody
+        // at a constant speed with no acceleration
+        // Vector2 destination = new Vector2(rb.position.x + currentPos.x * speedX * Time.fixedDeltaTime, rb.position.y + currentPos.y * speedY * Time.fixedDeltaTime);
+        // rb.MovePosition(destination);
+        
+        // speedY = -speedY; // Reverse the Y-axis movement
+        // // This is because positive velocity
+        // // is UP and negative velocity is DOWN
+        
+        Vector2 velocity = new Vector2(speedX, -speedY);
+        Vector2 destination = rb.position + velocity * Time.fixedDeltaTime;
+        rb.MovePosition(destination);
     }
     
+    // Collision with Scene Barriers
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Barrier"))

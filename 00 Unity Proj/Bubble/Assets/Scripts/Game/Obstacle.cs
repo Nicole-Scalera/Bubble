@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityCommunity.UnitySingleton;
 
-public class Obstacle : PersistentMonoSingleton<Obstacle>
+public class Obstacle : MonoBehaviour
 {
     // ===== Variables =====
     private string obstacleName; // Name of the GameObject
