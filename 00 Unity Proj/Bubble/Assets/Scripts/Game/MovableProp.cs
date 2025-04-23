@@ -30,7 +30,7 @@ public abstract class MovableProp : MonoBehaviour, IMovable
         currentPos = startPos;
     }
 
-    // Method to get prop-specific information (to be overridden by child classes)
+    // Method to get prop-specific information (overridden by child classes)
     public virtual void GetPropInfo()
     {
         rb = GetComponent<Rigidbody2D>(); // RigidBody2D
@@ -42,11 +42,11 @@ public abstract class MovableProp : MonoBehaviour, IMovable
         Debug.Log($"MovableProp.cs > GetPropInfo(): Prop's movement speed is {speed}");
     }
     
-    // Grab info about Target
+    // Get the following information about the Target
     public virtual void GetTargetInfo()
     {
-        // Get the following information about the Target
-        targetPos = target.GetTargetPosition(); // Target's Position
+        // Target's Position
+        targetPos = target.GetTargetPosition();
         
         // Debug this info
         Debug.Log($"Target's position is {targetPos}");
@@ -79,9 +79,7 @@ public abstract class MovableProp : MonoBehaviour, IMovable
     // Move the prop (call this in FixedUpdate())
     public virtual void Move()
     {
-        // rb.MovePosition(currentPos);
-        
-        // Calculates the props's destination to move its Rigidbody
+        // Calculates the prop's destination to move its Rigidbody
         // at a constant speed with no acceleration
         Vector2 destination = new Vector2(rb.position.x + currentPos.x * speed * Time.fixedDeltaTime, currentPos.y);
         rb.MovePosition(destination);
