@@ -92,15 +92,22 @@ public abstract class MovableProp : MonoBehaviour, IMovable
         Vector2 destination = new Vector2(rb.position.x + currentPos.x * speedX * Time.fixedDeltaTime, currentPos.y);
         rb.MovePosition(destination);
     }
-
+    
     // Destroy when reaching the Target Object
-    public virtual void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Target"))
         {
             Destroy(gameObject);
         }
     }
+    
+    // public virtual void ReachedTarget()
+    // {
+    //
+    // }
+
+
 }
 
 // Interface explains how this data is supposed to be implemented.
@@ -112,4 +119,5 @@ public interface IMovable
     void GetTargetInfo();
     void UpdatePosition();
     void Move();
+    // void ReachedTarget();
 }
