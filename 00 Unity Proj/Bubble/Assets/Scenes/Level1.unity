@@ -455,7 +455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6058467821548454656, guid: 1b595effcf142c1439339c9fc39d3dc8, type: 3}
       propertyPath: obstacleSpeedY
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1052,7 +1052,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6058467821548454656, guid: 1b595effcf142c1439339c9fc39d3dc8, type: 3}
       propertyPath: obstacleSpeedY
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2809,7 +2809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6058467821548454656, guid: 1b595effcf142c1439339c9fc39d3dc8, type: 3}
       propertyPath: obstacleSpeedY
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

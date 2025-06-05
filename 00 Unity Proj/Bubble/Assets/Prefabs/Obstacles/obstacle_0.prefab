@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleSpeedX: 0
-  obstacleSpeedY: 2
+  obstacleSpeedY: 5
 --- !u!114 &7921863115703299176
 MonoBehaviour:
   m_ObjectHideFlags: 0
