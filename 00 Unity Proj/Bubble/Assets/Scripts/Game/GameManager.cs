@@ -1,4 +1,3 @@
-// using Obvious.Soap.Example;
 using UnityCommunity.UnitySingleton;
 using UnityEngine;
 using UnityEngine.SceneManagement;
